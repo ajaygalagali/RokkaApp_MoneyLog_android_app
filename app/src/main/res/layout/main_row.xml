@@ -22,18 +22,20 @@
         android:text="5000"
         android:textSize="30sp" />
 
-    <ImageView
-        android:id="@+id/imageViewPlus"
-        android:layout_width="25dp"
+    <ImageButton
+        android:id="@+id/imageButtonPlus"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="#00AAAAAA"
         app:srcCompat="@drawable/plus" />
 
-    <ImageView
-        android:id="@+id/imageViewMinus"
-        android:layout_width="25dp"
+    <ImageButton
+        android:id="@+id/imageButtonMinus"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="#00FFFFFF"
         app:srcCompat="@drawable/minus" />
 
 </LinearLayout>

@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
         arrayList = new ArrayList<>();
 
-        arrayList.add(new HomeList(-89,"ಅಜಯ",R.drawable.plus,R.drawable.minus));
-        arrayList.add(new HomeList(-456,"ಧನು",R.drawable.plus,R.drawable.minus));
-        arrayList.add(new HomeList(200,"ವಿಕ್ರಂ",R.drawable.plus,R.drawable.minus));
-        arrayList.add(new HomeList(400,"ಶೋಭಾ",R.drawable.plus,R.drawable.minus));
-        arrayList.add(new HomeList(899,"ವಿವೇಕ್",R.drawable.plus,R.drawable.minus));
+        arrayList.add(new HomeList(-89,"ಅಜಯ"));
+        arrayList.add(new HomeList(-892,"Astro"));
+        arrayList.add(new HomeList(-90,"Boi"));
+        arrayList.add(new HomeList(-67,"Hello"));
+        arrayList.add(new HomeList(89,"ಅಜ"));
 
         homeListAdapter = new HomeListAdapter(this,arrayList);
         listViewMain.setAdapter(homeListAdapter);

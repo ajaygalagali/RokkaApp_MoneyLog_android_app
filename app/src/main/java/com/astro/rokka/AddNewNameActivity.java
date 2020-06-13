@@ -29,7 +29,7 @@ public class AddNewNameActivity extends AppCompatActivity {
             balance="0";
         }
 
-        MainActivity.arrayList.add(new HomeList(Integer.valueOf(balance),Name,R.drawable.plus,R.drawable.minus));
+        MainActivity.arrayList.add(new HomeList(Integer.valueOf(balance),Name));
         MainActivity.homeListAdapter.notifyDataSetChanged();
         finish();
 
