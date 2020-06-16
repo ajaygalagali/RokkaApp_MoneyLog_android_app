@@ -10,16 +10,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView"
         android:paddingLeft="10dp"
-        android:textSize="30sp"/>
+        android:text="TextView"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textViewDetTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:paddingRight="10dp"
         android:text="TextView"
-        android:paddingLeft="10dp"
-        android:textSize="30sp"/>
+        android:textAlignment="textEnd"
+        android:textSize="18sp" />
 </LinearLayout>

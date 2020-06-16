@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text=" ಹೆಸರು"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textViewBalance"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="5000"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
 
     <ImageButton
         android:id="@+id/imageButtonPlus"

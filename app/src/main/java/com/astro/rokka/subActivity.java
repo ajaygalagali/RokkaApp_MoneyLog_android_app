@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -52,30 +53,33 @@ public class subActivity extends AppCompatActivity {
 
         textViewName = findViewById(R.id.textViewSub);
         editText = findViewById(R.id.editTextSub);
-//        textViewName.setText(name+" ಬಾಕಿ");
+        textViewName.setText(name+" ಬಾಕಿ");
 
     }
 
     public void subClicked(View view) {
         userInput = String.valueOf(editText.getText());
-        currentTransaction = Integer.parseInt(userInput);
-        updatedBalance = Integer.parseInt(currentBalance)-currentTransaction;
+        if(userInput.isEmpty()){
+            Toast.makeText(this, "ಬಾಕಿ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+        }else {
+            currentTransaction = Integer.parseInt(userInput);
+            updatedBalance = Integer.parseInt(currentBalance) - currentTransaction;
 
-        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-        stringTime = currentDate+" "+currentTime;
+            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+            String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+            stringTime = currentDate + " " + currentTime;
 
-        db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
-        db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s",updatedBalance,posiOne ));
-        Log.i("Table 1","Updated");
+            db = openOrCreateDatabase("rokk_db", MODE_PRIVATE, null);
+            db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s", updatedBalance, posiOne));
+            Log.i("Table 1", "Updated");
 
-        db.execSQL(String.format("INSERT INTO '%s' (transfer,date) VALUES(%s,'%s')",posiOne,currentTransaction*(-1),stringTime));
-        Log.i("Table 2","Inserted");
+            db.execSQL(String.format("INSERT INTO '%s' (transfer,date) VALUES(%s,'%s')", posiOne, currentTransaction * (-1), stringTime));
+            Log.i("Table 2", "Inserted");
 
-        Intent goToMain = new Intent(subActivity.this,MainActivity.class);
-        startActivity(goToMain);
+            Intent goToMain = new Intent(subActivity.this, MainActivity.class);
+            startActivity(goToMain);
 
 
-
+        }
     }
 }
