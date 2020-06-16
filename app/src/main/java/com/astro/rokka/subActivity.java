@@ -20,7 +20,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-public class plusActivity extends AppCompatActivity {
+public class subActivity extends AppCompatActivity {
     TextView textViewName;
     EditText editText;
 
@@ -41,7 +41,7 @@ public class plusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plus);
+        setContentView(R.layout.activity_sub);
 
         Intent i =getIntent();
         name = i.getStringExtra("name");
@@ -50,16 +50,16 @@ public class plusActivity extends AppCompatActivity {
         assert position != null;
         posiOne = Integer.parseInt(position)+1;
 
-        textViewName = findViewById(R.id.textViewPlus);
-        editText = findViewById(R.id.editTextPlus);
-        textViewName.setText(name+" ಕೊಡು");
+        textViewName = findViewById(R.id.textViewSub);
+        editText = findViewById(R.id.editTextSub);
+//        textViewName.setText(name+" ಬಾಕಿ");
 
     }
 
-    public void plusClicked(View view) {
+    public void subClicked(View view) {
         userInput = String.valueOf(editText.getText());
         currentTransaction = Integer.parseInt(userInput);
-        updatedBalance = Integer.parseInt(currentBalance)+currentTransaction;
+        updatedBalance = Integer.parseInt(currentBalance)-currentTransaction;
 
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
@@ -72,7 +72,7 @@ public class plusActivity extends AppCompatActivity {
         db.execSQL(String.format("INSERT INTO '%s' (transfer,date) VALUES(%s,'%s')",posiOne,currentBalance,stringTime));
         Log.i("Table 2","Inserted");
 
-        Intent goToMain = new Intent(plusActivity.this,MainActivity.class);
+        Intent goToMain = new Intent(subActivity.this,MainActivity.class);
         startActivity(goToMain);
 
 

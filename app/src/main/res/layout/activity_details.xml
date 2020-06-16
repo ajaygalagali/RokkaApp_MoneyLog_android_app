@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".plusActivity">
+    tools:context=".DetailsActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,49 +29,37 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewPlus"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:text="ಕೊಡು"
-        android:textColor="#30336B"
+        android:layout_marginTop="15dp"
+        android:text="TextView"
+        android:textColor="#30336b"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <EditText
-        android:id="@+id/editTextPlus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="ಜಮಾ ಮಾಡಿ"
-        android:inputType="number"
-        android:paddingLeft="15dp"
-        android:paddingTop="10dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="10dp"
+    <ListView
+        android:id="@+id/listViewDetails"
+        android:layout_width="408dp"
+        android:layout_height="589dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPlus" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonMinusClicked"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/button_bg"
-        android:onClick="plusClicked"
-        android:text="ಜಮಾ"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
+        android:onClick="refresh"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/listViewDetails"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPlus" />
-
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,26 +1,25 @@
 package com.astro.rokka;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +28,28 @@ public class MainActivity extends AppCompatActivity {
     ListView listViewMain;
     static ArrayList<HomeList> arrayList;
     static HomeListAdapter homeListAdapter;
-
+    SQLiteDatabase db;
+    String mem_name_from_db;
+    Integer mem_balance_from_db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+//        SQLiteDatabase db = openOrCreateDatabase("balance",MODE_PRIVATE,null);
+//
+//        Cursor c =db.rawQuery("SELECT * FROM "+,null);
+//        int balanceIndex = c.getColumnIndex("balance");
+//
+//        int TimeIndex = c.getColumnIndex("createdAt");
+//        c.moveToFirst();
+//        while(!c.isAfterLast()){
+//            Log.i("Balance",c.getString(balanceIndex));
+//            Log.i("Time",c.getString(TimeIndex));
+//            c.moveToNext();
+//        }
+
 
         listViewMain = findViewById(R.id.listViewMain);
 
@@ -41,6 +57,27 @@ public class MainActivity extends AppCompatActivity {
 
 
         homeListAdapter = new HomeListAdapter(this,arrayList);
+        db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
+        Cursor c = db.rawQuery("SELECT * FROM member_info",null);
+        Log.i("C","Done");
+        int mem_NameIndex = c.getColumnIndex("mem_name");
+        int mem_balanceIndex = c.getColumnIndex("mem_balance");
+        Log.i("Name Bal", mem_NameIndex +String.valueOf(mem_balanceIndex));
+
+        c.moveToFirst();
+        int j= c.getCount();
+        for(int i=0;i<j;i++){
+            mem_name_from_db = String.valueOf(c.getString(mem_NameIndex));
+            mem_balance_from_db = c.getInt(mem_balanceIndex);
+
+            arrayList.add(new HomeList(mem_balance_from_db,mem_name_from_db));
+
+            c.moveToNext();
+
+        }
+        c.close();
+
         listViewMain.setAdapter(homeListAdapter);
 
         /*listViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             labList = list;
         }
 
+        @SuppressLint("ViewHolder")
         @NonNull
         @Override
         public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
@@ -80,13 +118,6 @@ public class MainActivity extends AppCompatActivity {
             HomeList currentPosition = labList.get(position);
 
 
-
-        /*ImageView imageViewPlus = view.findViewById(R.id.imageViewPlus);
-        imageViewPlus.setImageResource(currentPosition.getPlusID());*/
-
-        /*ImageView imageViewMinus = view.findViewById(R.id.imageViewMinus);
-        imageViewMinus.setImageResource(currentPosition.getMinusID());*/
-
             final TextView textViewName = view.findViewById(R.id.textViewName);
             textViewName.setText(currentPosition.getLabName());
 
@@ -94,12 +125,15 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 //                Log.i("Name",String.valueOf(textViewName.getText()));
-                    Toast.makeText(mContext, String.valueOf(textViewName.getText()), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, String.valueOf(textViewName.getText()), Toast.LENGTH_SHORT).show();
+                    Intent goToDet = new Intent(MainActivity.this,DetailsActivity.class);
+                    goToDet.putExtra("name",String.valueOf(textViewName.getText()));
+                    startActivity(goToDet);
 
                 }
             });
 
-            TextView textViewBalance = view.findViewById(R.id.textViewBalance);
+            final TextView textViewBalance = view.findViewById(R.id.textViewBalance);
             int bal = currentPosition.getBalance();
 
             textViewBalance.setText(String.valueOf(currentPosition.getBalance()));
@@ -116,7 +150,10 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 //                Log.i("Minus",String.valueOf(v.getTag()));
-                    Intent goToMinus = new Intent(mContext,minusActivity.class);
+                    Intent goToMinus = new Intent(mContext,subActivity.class);
+                    goToMinus.putExtra("name",String.valueOf(textViewName.getText()));
+                    goToMinus.putExtra("currentBalance",String.valueOf(textViewBalance.getText()));
+                    goToMinus.putExtra("position",String.valueOf(v.getTag()));
                     startActivity(goToMinus);
 
 
@@ -134,18 +171,13 @@ public class MainActivity extends AppCompatActivity {
 //                Log.i("Plus",String.valueOf(v.getTag()));
                     Intent goToAdd = new Intent(mContext,plusActivity.class);
                     goToAdd.putExtra("name",String.valueOf(textViewName.getText()));
+                    goToAdd.putExtra("currentBalance",String.valueOf(textViewBalance.getText()));
                     goToAdd.putExtra("position",String.valueOf(v.getTag()));
 
                     startActivity(goToAdd);
 
                 }
             });
-
-
-
-
-
-
 
             return view;
 

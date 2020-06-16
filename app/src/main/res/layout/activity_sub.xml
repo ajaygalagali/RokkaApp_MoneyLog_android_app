@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".plusActivity">
+    tools:context=".subActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,12 +29,12 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewPlus"
+        android:id="@+id/textViewSub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:text="ಕೊಡು"
-        android:textColor="#30336B"
+        android:layout_marginTop="55dp"
+        android:text="TextView"
+        android:textColor="#30336b"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -42,13 +42,12 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <EditText
-        android:id="@+id/editTextPlus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:id="@+id/editTextSub"
+        android:layout_width="196dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="ಜಮಾ ಮಾಡಿ"
+        android:hint="ಬಾಕಿ ಬರೆಯಿರಿ"
         android:inputType="number"
         android:paddingLeft="15dp"
         android:paddingTop="10dp"
@@ -57,21 +56,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPlus" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSub" />
 
     <Button
-        android:id="@+id/buttonMinusClicked"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/button_bg"
-        android:onClick="plusClicked"
-        android:text="ಜಮಾ"
+        android:onClick="subClicked"
+        android:text="ಬಾಕಿ"
         android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPlus" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editTextSub" />
 </androidx.constraintlayout.widget.ConstraintLayout>
