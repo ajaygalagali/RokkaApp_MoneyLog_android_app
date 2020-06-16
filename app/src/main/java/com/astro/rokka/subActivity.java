@@ -69,7 +69,7 @@ public class subActivity extends AppCompatActivity {
         db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s",updatedBalance,posiOne ));
         Log.i("Table 1","Updated");
 
-        db.execSQL(String.format("INSERT INTO '%s' (transfer,date) VALUES(%s,'%s')",posiOne,currentBalance,stringTime));
+        db.execSQL(String.format("INSERT INTO '%s' (transfer,date) VALUES(%s,'%s')",posiOne,currentTransaction*(-1),stringTime));
         Log.i("Table 2","Inserted");
 
         Intent goToMain = new Intent(subActivity.this,MainActivity.class);

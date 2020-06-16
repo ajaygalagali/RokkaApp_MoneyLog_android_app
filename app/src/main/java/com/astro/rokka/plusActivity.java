@@ -69,10 +69,11 @@ public class plusActivity extends AppCompatActivity {
         db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s",updatedBalance,posiOne ));
         Log.i("Table 1","Updated");
 
-        db.execSQL(String.format("INSERT INTO '%s' (transfer,date) VALUES(%s,'%s')",posiOne,currentBalance,stringTime));
+        db.execSQL(String.format("INSERT INTO '%s' (transfer,date) VALUES(%s,'%s')",posiOne,currentTransaction,stringTime));
         Log.i("Table 2","Inserted");
 
         Intent goToMain = new Intent(plusActivity.this,MainActivity.class);
+
         startActivity(goToMain);
 
 

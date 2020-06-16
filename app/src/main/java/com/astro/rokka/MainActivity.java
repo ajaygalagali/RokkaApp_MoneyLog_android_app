@@ -27,10 +27,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     ListView listViewMain;
     static ArrayList<HomeList> arrayList;
+    @SuppressLint("StaticFieldLeak")
     static HomeListAdapter homeListAdapter;
     SQLiteDatabase db;
     String mem_name_from_db;
     Integer mem_balance_from_db;
+    String mem_id_from_db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
         db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
         Cursor c = db.rawQuery("SELECT * FROM member_info",null);
-        Log.i("C","Done");
+
         int mem_NameIndex = c.getColumnIndex("mem_name");
         int mem_balanceIndex = c.getColumnIndex("mem_balance");
         Log.i("Name Bal", mem_NameIndex +String.valueOf(mem_balanceIndex));
@@ -79,15 +81,6 @@ public class MainActivity extends AppCompatActivity {
         c.close();
 
         listViewMain.setAdapter(homeListAdapter);
-
-        /*listViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Log.i("Position",String.valueOf(position));
-            }
-        });*/
-
 
     }
 
@@ -127,7 +120,28 @@ public class MainActivity extends AppCompatActivity {
 //                Log.i("Name",String.valueOf(textViewName.getText()));
 //                    Toast.makeText(mContext, String.valueOf(textViewName.getText()), Toast.LENGTH_SHORT).show();
                     Intent goToDet = new Intent(MainActivity.this,DetailsActivity.class);
-                    goToDet.putExtra("name",String.valueOf(textViewName.getText()));
+
+
+                    db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
+                    db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
+                    Cursor c = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'", textViewName.getText()),null);
+                    Log.i("C","Done");
+                    int mem_idIndex = c.getColumnIndex("id");
+
+                    c.moveToFirst();
+                    int j= c.getCount();
+                    for(int i=0;i<j;i++){
+                        mem_id_from_db = String.valueOf(c.getString(mem_idIndex));
+                        c.moveToNext();
+                    }
+                    c.close();
+                    Log.i("ID of Main",mem_id_from_db);
+                    goToDet.putExtra("mem_id",String.valueOf(mem_id_from_db));
+                    goToDet.putExtra("name",textViewName.getText());
+
+
+
+
                     startActivity(goToDet);
 
                 }

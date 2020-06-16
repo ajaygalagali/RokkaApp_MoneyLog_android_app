@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,9 +26,12 @@ import java.util.List;
 public class DetailsActivity extends AppCompatActivity {
     SQLiteDatabase db;
     String Name;
-    int newTransfer;
+    TextView textViewHeading;
     ListView listViewDet;
     String Time;
+    String mem_id;
+    int transfer_index;
+    int date_index;
     static  DetailsAdapter detailsAdapter;
 
     static ArrayList<DetailsList> detList;
@@ -36,18 +40,35 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        Intent j = getIntent();
-        Name = j.getStringExtra("name");
-
-
-        db = openOrCreateDatabase("balance",MODE_PRIVATE,null);
         listViewDet = findViewById(R.id.listViewDetails);
+        textViewHeading = findViewById(R.id.textView5);
+
+        Intent i = getIntent();
+        mem_id = i.getStringExtra("mem_id");
+        Name = i.getStringExtra("name");
+        textViewHeading.setText(Name);
         detList = new ArrayList<>();
-        detailsAdapter = new DetailsAdapter(this,detList);
-//         detList.add(new DetailsList(11,"aaa"));
-//         detList.add(new DetailsList(11,"aaa"));
-//         detList.add(new DetailsList(11,"aaa"));
-//         detList.add(new DetailsList(11,"aaa"));
+        detailsAdapter = new DetailsAdapter(this, detList);
+
+        db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
+
+        @SuppressLint("Recycle") Cursor c = db.rawQuery(String.format("SELECT * FROM '%s'",mem_id),null);
+
+        int j = c.getCount();
+        transfer_index = c.getColumnIndex("transfer");
+        date_index = c.getColumnIndex("date");
+        Log.i("Index",String.valueOf(date_index)+" "+String.valueOf(transfer_index));
+        Log.i("Count",String.valueOf(j));
+        c.moveToFirst();
+        for(int k=0;k<j;k++){
+            int transfer = c.getInt(transfer_index);
+            String date = c.getString(date_index);
+            detList.add(new DetailsList(transfer,date));
+            c.moveToNext();
+        }
+
+
+
 
         listViewDet.setAdapter(detailsAdapter);
 
@@ -58,7 +79,7 @@ public class DetailsActivity extends AppCompatActivity {
         detailsAdapter.notifyDataSetChanged();
     }
 
-    public class DetailsAdapter extends ArrayAdapter<DetailsList> {
+    public static class DetailsAdapter extends ArrayAdapter<DetailsList> {
 
         private Context mContext;
         private List<DetailsList> cablist = new ArrayList<>();
@@ -70,6 +91,7 @@ public class DetailsActivity extends AppCompatActivity {
             cablist =list;
         }
 
+        @SuppressLint("ViewHolder")
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -80,34 +102,14 @@ public class DetailsActivity extends AppCompatActivity {
 
             TextView textViewNumber = view.findViewById(R.id.textViewDetNumber);
             TextView textViewTime  = view.findViewById(R.id.textViewDetTime);
-            int posPlus = position;
-            Log.i("Position det",String.valueOf(position));
-            Cursor c =db.rawQuery("SELECT * FROM "+Name+" WHERE id IS "+position+" AND newTransfer IS NOT NULL",null);
-            int newTransferIndex = c.getColumnIndex("newTransfer");
-            int TimeIndex = c.getColumnIndex("createdAt");
-            c.moveToFirst();
-            while(!c.isAfterLast()){
-//            Log.i("Balance",c.getString(balanceIndex));
-//            Log.i("Time",c.getString(TimeIndex));
-                newTransfer = Integer.valueOf(c.getInt(newTransferIndex));
-                Time = String.valueOf(c.getString(TimeIndex));
-                Log.i("newTransfer Before",String.valueOf(newTransfer));
 
-                textViewNumber.setText(String.valueOf(newTransfer));
-
-                Log.i("newTransfer After",String.valueOf(newTransfer));
-                Log.i("Time Before",Time);
-
-                textViewTime.setText(String.valueOf(Time));
-
-                Log.i("Time After",Time);
-                c.moveToNext();
+            textViewNumber.setText(String.valueOf(currentPosition.getNumber()));
+            if(currentPosition.getNumber() < 0){
+                textViewNumber.setTextColor(Color.RED);
+            }else {
+                textViewNumber.setTextColor(Color.GREEN);
             }
-
-
-//            detList.add(new DetailsList(newTransfer,Time));
-
-
+            textViewTime.setText(String.valueOf(currentPosition.getTime()));
 
             return view;
         }
