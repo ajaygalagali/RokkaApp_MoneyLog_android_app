@@ -32,8 +32,8 @@ public class DetailsActivity extends AppCompatActivity {
 
 
 
-    int date_index, days_index, paid_wages_index, rem_wages_index, total_wages_index, note_index;
-    int total_wages,paid_wages, rem_wages,days;
+    int date_index, days_index, paid_wages_index, rem_wages_index, total_wages_index, note_index, halfdays_index;
+    int total_wages,paid_wages, rem_wages,days,halfdays;
     String date, note;
 
     static  DetailsAdapter detailsAdapter;
@@ -67,6 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
         total_wages_index = c.getColumnIndex("total_wages");
         rem_wages_index = c.getColumnIndex("rem_wages");
         paid_wages_index = c.getColumnIndex("paid_wages");
+        halfdays_index = c.getColumnIndex("halfdays");
 
 
 
@@ -76,11 +77,12 @@ public class DetailsActivity extends AppCompatActivity {
             paid_wages = c.getInt(paid_wages_index);
             rem_wages = c.getInt(rem_wages_index);
             days = c.getInt(days_index);
+            halfdays = c.getInt(halfdays_index);
 
             date = c.getString(date_index);
             note = c.getString(note_index);
             //int days, int total_wages,int rem_wages,int paid_wages,String note,String time
-            detList.add(new DetailsList(days,total_wages,rem_wages,paid_wages,note,date));
+            detList.add(new DetailsList(days,total_wages,rem_wages,paid_wages,note,date,halfdays));
             c.moveToPrevious();
         }
 
@@ -127,7 +129,7 @@ public class DetailsActivity extends AppCompatActivity {
             textViewTotalWage = view.findViewById(R.id.textViewDtTotalWage);
 
             textViewDate.setText(currentPosition.getTime());
-            textViewDays.setText("ಆಳ : "+String.valueOf(currentPosition.getDays()));
+            textViewDays.setText("ಆಳ : "+String.valueOf(currentPosition.getDays())+" / "+String.valueOf(currentPosition.getHalfdays()));
             textViewNote.setText(currentPosition.getNote());
             textViewPaidWage.setText("ಕೊಟ್ಟುದ್ದು : "+String.valueOf(currentPosition.getPaid_wages()));
             textViewRemWage.setText("ಉಳುದ್ದಿದ್ದು : "+String.valueOf(currentPosition.getRem_wages()));

@@ -156,24 +156,8 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 textViewBalance.setTextColor(Color.GREEN);
             }
-            ImageButton imageButtonMinus = view.findViewById(R.id.imageButtonMinus);
-            imageButtonMinus.setTag(String.valueOf(position));
-//        Log.i("posi",String.valueOf(position));
-
-            imageButtonMinus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                Log.i("Minus",String.valueOf(v.getTag()));
-                    Intent goToMinus = new Intent(mContext,subActivity.class);
-                    goToMinus.putExtra("name",String.valueOf(textViewName.getText()));
-                    goToMinus.putExtra("currentBalance",String.valueOf(textViewBalance.getText()));
-                    goToMinus.putExtra("position",String.valueOf(v.getTag()));
-                    startActivity(goToMinus);
 
 
-
-                }
-            });
 
 
             ImageButton imageButtonPlus = view.findViewById(R.id.imageButtonPlus);

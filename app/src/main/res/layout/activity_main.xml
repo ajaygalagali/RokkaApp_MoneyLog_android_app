@@ -27,13 +27,13 @@
             android:textSize="24sp" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="right|end"
             android:layout_marginLeft="220dp"
             android:onClick="NewNameClicked"
-            app:srcCompat="@drawable/plus_white" />
+            app:srcCompat="@drawable/user_icon" />
     </LinearLayout>
 
     <ListView

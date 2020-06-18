@@ -9,9 +9,9 @@ public class DetailsList {
     private int rem_wages;
 
     private String note;
+    private int halfdays;
 
-
-    public DetailsList(int days, int total_wages,int rem_wages,int paid_wages,String note,String time){
+    public DetailsList(int days, int total_wages, int rem_wages, int paid_wages, String note, String time, int halfdays){
 
         this.time = time;
         this.days = days;
@@ -19,6 +19,7 @@ public class DetailsList {
         this.total_wages = total_wages;
         this.rem_wages = rem_wages;
         this.note = note;
+        this.halfdays=halfdays;
     }
 
     public String getNote() {
@@ -69,4 +70,11 @@ public class DetailsList {
         this.rem_wages = rem_wages;
     }
 
+    public int getHalfdays() {
+        return halfdays;
+    }
+
+    public void setHalfdays(int halfdays) {
+        this.halfdays = halfdays;
+    }
 }

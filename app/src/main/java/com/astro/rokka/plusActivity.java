@@ -26,15 +26,13 @@ import java.util.Objects;
 
 public class plusActivity extends AppCompatActivity {
     TextView textViewName, textViewPagar,textViewRem;
-    EditText editTextAal, editTextGiven, editTextNote;
+    EditText editTextAal, editTextGiven, editTextNote, editTextHalfdayAll,editTextHDP,editTextFDP;
 
-    Spinner spinner;
+
 
     String name, stringTime, currentBalance,position,given, note;
-    int currentTransaction,updatedBalance, posiOne,aal, totalPagar, spinnerValue, remPagar;
+    int updatedBalance, posiOne,aal, totalPagar, spinnerValue, remPagar, halfdays, hd_rate,fd_rate;
 
-    ArrayList<Integer> spinnerList;
-    ArrayAdapter<Integer> spinnerAdapter;
 
     SQLiteDatabase db;
     @SuppressLint("SetTextI18n")
@@ -57,19 +55,12 @@ public class plusActivity extends AppCompatActivity {
         editTextAal = findViewById(R.id.editTextaal);
         editTextGiven = findViewById(R.id.editTextKottiddu);
         editTextNote = findViewById(R.id.editTextNote);
-
-        spinner = findViewById(R.id.spinner);
-        spinnerList = new ArrayList<Integer>();
-        spinnerAdapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_item,spinnerList);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerList.add(300);
-        spinnerList.add(150);
-
-        spinner.setAdapter(spinnerAdapter);
-
-
+        editTextHalfdayAll = findViewById(R.id.editTextHalfdayAll);
+        editTextFDP = findViewById(R.id.editTextPagarFD);
+        editTextHDP = findViewById(R.id.editTextPagarHD);
 
         textViewName.setText(name+" ಜಮಾ");
+
 
 
     }
@@ -81,10 +72,15 @@ public class plusActivity extends AppCompatActivity {
 
         }else{
             String aalString =String.valueOf(editTextAal.getText());
+
             aal = Integer.parseInt(aalString);
-            spinnerValue = Integer.parseInt(spinner.getSelectedItem().toString());
-            totalPagar = aal * spinnerValue;
-            textViewPagar.setText("ಪಗಾರ: "+String.valueOf(totalPagar));
+            halfdays = Integer.parseInt(editTextHalfdayAll.getText().toString());
+
+            fd_rate = Integer.parseInt(editTextFDP.getText().toString());
+            hd_rate = Integer.parseInt(editTextHDP.getText().toString());
+
+            totalPagar = (aal*fd_rate)+(halfdays*hd_rate);
+            textViewPagar.setText("ಪಗಾರ: " + String.valueOf(totalPagar));
             given = String.valueOf(editTextGiven.getText());
             remPagar = totalPagar - Integer.valueOf(given);
             textViewRem.setText("ಉಳುದ್ದಿದ್ದು : "+String.valueOf(remPagar));
@@ -101,7 +97,7 @@ public class plusActivity extends AppCompatActivity {
             db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s", updatedBalance, posiOne));
             Log.i("Table 1", "Updated");
 
-            db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages) VALUES('%s',%s,%s,%s,'%s',%s)", posiOne, stringTime, aal, Integer.valueOf(given), remPagar,note,totalPagar));
+            db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages,halfdays) VALUES('%s',%s,%s,%s,'%s',%s,%s)", posiOne, stringTime, aal, Integer.valueOf(given), remPagar,note,totalPagar,halfdays));
             Log.i("Table 2", "Inserted");
             Intent goToMain = new Intent(plusActivity.this, MainActivity.class);
 
@@ -118,10 +114,15 @@ public class plusActivity extends AppCompatActivity {
         if(aalString.isEmpty()){
             Toast.makeText(this, "ಆಳ ಬರೆಯಿರ", Toast.LENGTH_SHORT).show();
         }else {
-            aal = Integer.parseInt(aalString);
+            String aalStringG =String.valueOf(editTextAal.getText());
 
-            spinnerValue = Integer.parseInt(spinner.getSelectedItem().toString());
-            totalPagar = aal * spinnerValue;
+            aal = Integer.parseInt(aalStringG);
+            halfdays = Integer.parseInt(editTextHalfdayAll.getText().toString());
+
+            fd_rate = Integer.parseInt(editTextFDP.getText().toString());
+            hd_rate = Integer.parseInt(editTextHDP.getText().toString());
+
+            totalPagar = (aal*fd_rate)+(halfdays*hd_rate);
             textViewPagar.setText("ಪಗಾರ: "+String.valueOf(totalPagar));
 
         }
@@ -135,16 +136,19 @@ public class plusActivity extends AppCompatActivity {
         }else if(given.isEmpty()){
             Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ ", Toast.LENGTH_SHORT).show();
         }else {
-            aal = Integer.parseInt(aalString);
+            aalString = String.valueOf(editTextAal.getText());
 
-            spinnerValue = Integer.parseInt(spinner.getSelectedItem().toString());
-            totalPagar = aal * spinnerValue;
+            aal = Integer.parseInt(aalString);
+            halfdays = Integer.parseInt(editTextHalfdayAll.getText().toString());
+
+            fd_rate = Integer.parseInt(editTextFDP.getText().toString());
+            hd_rate = Integer.parseInt(editTextHDP.getText().toString());
+
+            totalPagar = (aal*fd_rate)+(halfdays*hd_rate);
             textViewPagar.setText("ಪಗಾರ: "+String.valueOf(totalPagar));
 
             remPagar = totalPagar - Integer.valueOf(given);
             textViewRem.setText("ಉಳುದ್ದಿದ್ದು : "+String.valueOf(remPagar));
-
-
 
         }
     }

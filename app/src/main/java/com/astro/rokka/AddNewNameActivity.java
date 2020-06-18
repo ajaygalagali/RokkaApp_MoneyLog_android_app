@@ -67,7 +67,7 @@ public class AddNewNameActivity extends AppCompatActivity {
             }
 
             //CREATING TABLE 2
-            db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,days INT,total_wages INT,paid_wages INT,rem_wages INT,date VARCHAR,note VARCHAR)", mem_id_from_db));
+            db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,days INT,total_wages INT,paid_wages INT,rem_wages INT,date VARCHAR,note VARCHAR,halfdays INT)", mem_id_from_db));
             Log.i("Table 2 ", "Created");
 
             MainActivity.homeListAdapter.notifyDataSetChanged();
