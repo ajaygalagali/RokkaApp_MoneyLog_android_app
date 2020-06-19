@@ -29,7 +29,7 @@ public class plusActivity extends AppCompatActivity {
     EditText editTextAal, editTextGiven, editTextNote, editTextHalfdayAll,editTextHDP,editTextFDP;
 
 
-
+    String tFulldays,tHalfdays,tFullPagar,tHalfPagar;
     String name, stringTime, currentBalance,position,given, note;
     int updatedBalance, posiOne,aal, totalPagar, spinnerValue, remPagar, halfdays, hd_rate,fd_rate;
 
@@ -65,30 +65,68 @@ public class plusActivity extends AppCompatActivity {
 
     }
 
-    public void plusClicked(View view) {
+    public int calculateTotalWage(String tFulldays,String tHalfdays,String tFullPagar,String tHalfPagar){
+        if(tHalfdays.isEmpty() && tHalfPagar.isEmpty()){
 
-        if(editTextAal.getText().toString().isEmpty() || editTextGiven.getText().toString().isEmpty()){
+            if(tFulldays.isEmpty() || tFullPagar.isEmpty()){
+                Toast.makeText(this, "ಸಂಜೆವರೆಗೆ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+            }else{
+                aal = Integer.parseInt(editTextAal.getText().toString());
+
+                halfdays=0;
+                hd_rate = 0;
+                fd_rate = Integer.parseInt(editTextFDP.getText().toString());
+
+                totalPagar = (aal*fd_rate)+(halfdays*hd_rate);
+                return totalPagar;
+            }
+        }else if(tFulldays.isEmpty() && tFullPagar.isEmpty()){
+            if(tHalfdays.isEmpty() || tHalfPagar.isEmpty()){
+                Toast.makeText(this, "ಮಧ್ಯಾಹ್ನವರೆಗ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+            }else{
+
+                halfdays = Integer.parseInt(editTextHalfdayAll.getText().toString());
+                hd_rate = Integer.parseInt(editTextHDP.getText().toString());
+
+                aal = 0;
+                fd_rate=0;
+                totalPagar = (aal*fd_rate)+(halfdays*hd_rate);
+                return totalPagar;
+            }
+        } else if(tFullPagar.isEmpty() || tFulldays.isEmpty() || tHalfPagar.isEmpty() || tHalfdays.isEmpty() ) {
             Toast.makeText(this, "ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
-
         }else{
-            String aalString =String.valueOf(editTextAal.getText());
-
-            aal = Integer.parseInt(aalString);
+            Log.i("In cal part","True");
+            aal = Integer.parseInt(editTextAal.getText().toString());
             halfdays = Integer.parseInt(editTextHalfdayAll.getText().toString());
-
-            fd_rate = Integer.parseInt(editTextFDP.getText().toString());
             hd_rate = Integer.parseInt(editTextHDP.getText().toString());
+            fd_rate = Integer.parseInt(editTextFDP.getText().toString());
 
             totalPagar = (aal*fd_rate)+(halfdays*hd_rate);
-            textViewPagar.setText("ಪಗಾರ: " + String.valueOf(totalPagar));
-            given = String.valueOf(editTextGiven.getText());
+            return totalPagar;
+
+        }
+        return 0;
+    }
+
+    public void plusClicked(View view) {
+
+        tFulldays = editTextAal.getText().toString();
+        tHalfdays = editTextHalfdayAll.getText().toString();
+        tFullPagar = editTextFDP.getText().toString();
+        tHalfPagar = editTextHDP.getText().toString();
+
+        given = editTextGiven.getText().toString();
+        totalPagar = calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar);
+        textViewPagar.setText("ಒಟ್ಟು ಪಗಾರ : + "+String.valueOf(totalPagar));
+        if(given.isEmpty()){
+            Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+        }else {
+
             remPagar = totalPagar - Integer.valueOf(given);
-            textViewRem.setText("ಉಳುದ್ದಿದ್ದು : "+String.valueOf(remPagar));
-
             note = editTextNote.getText().toString();
-
-
             updatedBalance = Integer.parseInt(currentBalance) + remPagar;
+
             String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
             String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
             stringTime = currentDate + " " + currentTime;
@@ -97,7 +135,7 @@ public class plusActivity extends AppCompatActivity {
             db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s", updatedBalance, posiOne));
             Log.i("Table 1", "Updated");
 
-            db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages,halfdays) VALUES('%s',%s,%s,%s,'%s',%s,%s)", posiOne, stringTime, aal, Integer.valueOf(given), remPagar,note,totalPagar,halfdays));
+            db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages,halfdays) VALUES('%s',%s,%s,%s,'%s',%s,%s)", posiOne, stringTime, aal, Integer.valueOf(given), remPagar, note, totalPagar, halfdays));
             Log.i("Table 2", "Inserted");
             Intent goToMain = new Intent(plusActivity.this, MainActivity.class);
 
@@ -109,47 +147,32 @@ public class plusActivity extends AppCompatActivity {
     }
 
     public void aalClicked(View view) {
-        String aalString =String.valueOf(editTextAal.getText());
+        tFulldays = editTextAal.getText().toString();
+        tHalfdays = editTextHalfdayAll.getText().toString();
+        tFullPagar = editTextFDP.getText().toString();
+        tHalfPagar = editTextHDP.getText().toString();
 
-        if(aalString.isEmpty()){
-            Toast.makeText(this, "ಆಳ ಬರೆಯಿರ", Toast.LENGTH_SHORT).show();
-        }else {
-            String aalStringG =String.valueOf(editTextAal.getText());
+        textViewPagar.setText("ಒಟ್ಟು ಪಗಾರ : "+String.valueOf(calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar)));
 
-            aal = Integer.parseInt(aalStringG);
-            halfdays = Integer.parseInt(editTextHalfdayAll.getText().toString());
-
-            fd_rate = Integer.parseInt(editTextFDP.getText().toString());
-            hd_rate = Integer.parseInt(editTextHDP.getText().toString());
-
-            totalPagar = (aal*fd_rate)+(halfdays*hd_rate);
-            textViewPagar.setText("ಪಗಾರ: "+String.valueOf(totalPagar));
-
-        }
     }
 
     public void givenClicked(View view) {
-        String aalString =String.valueOf(editTextAal.getText());
-        given = String.valueOf(editTextGiven.getText());
-        if(aalString.isEmpty()){
-            Toast.makeText(this, "ಆಳ ಬರೆಯಿರ", Toast.LENGTH_SHORT).show();
-        }else if(given.isEmpty()){
-            Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ ", Toast.LENGTH_SHORT).show();
-        }else {
-            aalString = String.valueOf(editTextAal.getText());
 
-            aal = Integer.parseInt(aalString);
-            halfdays = Integer.parseInt(editTextHalfdayAll.getText().toString());
+        tFulldays = editTextAal.getText().toString();
+        tHalfdays = editTextHalfdayAll.getText().toString();
+        tFullPagar = editTextFDP.getText().toString();
+        tHalfPagar = editTextHDP.getText().toString();
 
-            fd_rate = Integer.parseInt(editTextFDP.getText().toString());
-            hd_rate = Integer.parseInt(editTextHDP.getText().toString());
+        given = editTextGiven.getText().toString();
+            totalPagar = calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar);
+            textViewPagar.setText("ಒಟ್ಟು ಪಗಾರ : + "+String.valueOf(totalPagar));
+            if(given.isEmpty()){
+                Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+            }else {
 
-            totalPagar = (aal*fd_rate)+(halfdays*hd_rate);
-            textViewPagar.setText("ಪಗಾರ: "+String.valueOf(totalPagar));
+                remPagar = totalPagar - Integer.valueOf(given);
+                textViewRem.setText("ಉಳುದ್ದಿದ್ದು : " + String.valueOf(remPagar));
+            }
 
-            remPagar = totalPagar - Integer.valueOf(given);
-            textViewRem.setText("ಉಳುದ್ದಿದ್ದು : "+String.valueOf(remPagar));
-
-        }
     }
 }
