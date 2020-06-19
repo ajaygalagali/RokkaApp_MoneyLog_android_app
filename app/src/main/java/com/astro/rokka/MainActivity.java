@@ -1,6 +1,7 @@
 package com.astro.rokka;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -37,21 +39,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-//        SQLiteDatabase db = openOrCreateDatabase("balance",MODE_PRIVATE,null);
-//
-//        Cursor c =db.rawQuery("SELECT * FROM "+,null);
-//        int balanceIndex = c.getColumnIndex("balance");
-//
-//        int TimeIndex = c.getColumnIndex("createdAt");
-//        c.moveToFirst();
-//        while(!c.isAfterLast()){
-//            Log.i("Balance",c.getString(balanceIndex));
-//            Log.i("Time",c.getString(TimeIndex));
-//            c.moveToNext();
-//        }
-
 
         listViewMain = findViewById(R.id.listViewMain);
 
@@ -181,5 +168,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    public void onBackPressed(){
+
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
     }
 }
