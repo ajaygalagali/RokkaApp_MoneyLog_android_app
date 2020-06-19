@@ -28,10 +28,12 @@
 
         <ImageView
             android:id="@+id/imageView4"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="right|end"
             android:layout_marginLeft="220dp"
+            android:padding="10dp"
             android:onClick="NewNameClicked"
             app:srcCompat="@drawable/user_icon" />
     </LinearLayout>

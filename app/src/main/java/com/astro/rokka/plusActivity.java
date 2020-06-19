@@ -165,7 +165,7 @@ public class plusActivity extends AppCompatActivity {
 
         given = editTextGiven.getText().toString();
             totalPagar = calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar);
-            textViewPagar.setText("ಒಟ್ಟು ಪಗಾರ : + "+String.valueOf(totalPagar));
+//            textViewPagar.setText("ಒಟ್ಟು ಪಗಾರ : + "+String.valueOf(totalPagar));
             if(given.isEmpty()){
                 Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
             }else {
