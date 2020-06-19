@@ -3,6 +3,7 @@ package com.astro.rokka;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -178,13 +180,28 @@ public class MainActivity extends AppCompatActivity {
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Toast.makeText(mContext, String.valueOf(textViewName.getText()), Toast.LENGTH_SHORT).show();
-                    db.execSQL(String.format("DELETE FROM member_info WHERE mem_name IS '%s'",textViewName.getText().toString()));
-                    Log.i("Deleted","true");
-//                    arrayList.remove(position);
-//                    homeListAdapter.notifyDataSetChanged();
-                    finish();
-                    startActivity(getIntent());
+//                    Toast.makeText(mContext, String.valueOf(textViewName.getText()), Toast.LENGTH_SHORT).show();
+
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle(String.valueOf(textViewName.getText()+" : ಡಿಲಿಟ ಮಾಡಿ?"))
+                            .setMessage("ಈ ಟಿಪ್ಪಣಿಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ??")
+                            .setPositiveButton("ಹೌದು", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    db.execSQL(String.format("DELETE FROM member_info WHERE mem_name IS '%s'",textViewName.getText().toString()));
+                                    Toast.makeText(mContext, "ಅಳಿಸಲಾಗಿದೆ", Toast.LENGTH_SHORT).show();
+                                    arrayList.remove(position);
+                                    homeListAdapter.notifyDataSetChanged();
+//                                    finish();
+//                                    startActivity(getIntent());
+                                }
+
+                            })
+                            .setNegativeButton("ಬೇಡ",null).show();
+
+
+
                     return true;
                 }
             });
