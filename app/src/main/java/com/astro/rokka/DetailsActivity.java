@@ -3,10 +3,12 @@ package com.astro.rokka;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,12 +21,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
-    SQLiteDatabase db;
+
+
     String Name, mem_id;
 
     TextView textViewHeading;
@@ -34,7 +38,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     int date_index, days_index, paid_wages_index, rem_wages_index, total_wages_index, note_index, halfdays_index;
     int total_wages,paid_wages, rem_wages,days,halfdays;
-    String date, note;
+    String date, note,bal_from_main;
 
     static  DetailsAdapter detailsAdapter;
 
@@ -50,14 +54,14 @@ public class DetailsActivity extends AppCompatActivity {
         Intent i = getIntent();
         mem_id = i.getStringExtra("mem_id");
         Name = i.getStringExtra("name");
+        bal_from_main = i.getStringExtra("balance");
         Log.i("name",Name);
         textViewHeading.setText(Name);
 
         detList = new ArrayList<>();
         detailsAdapter = new DetailsAdapter(this, detList);
 
-        db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
-
+        SQLiteDatabase db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
         @SuppressLint("Recycle") Cursor c = db.rawQuery(String.format("SELECT * FROM '%s'",mem_id),null);
 
         int j = c.getCount();
@@ -87,7 +91,7 @@ public class DetailsActivity extends AppCompatActivity {
             c.moveToPrevious();
         }
 
-
+        c.close();
 
 
         listViewDet.setAdapter(detailsAdapter);
@@ -99,7 +103,7 @@ public class DetailsActivity extends AppCompatActivity {
         detailsAdapter.notifyDataSetChanged();
     }
 
-    public static class DetailsAdapter extends ArrayAdapter<DetailsList> {
+    public class DetailsAdapter extends ArrayAdapter<DetailsList> {
 
         private Context mContext;
         private List<DetailsList> cablist = new ArrayList<>();
@@ -114,13 +118,13 @@ public class DetailsActivity extends AppCompatActivity {
         @SuppressLint("ViewHolder")
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 //            return super.getView(position, convertView, parent);
             View view = convertView;
             view = LayoutInflater.from(mContext).inflate(R.layout.details_row,parent,false);
-            DetailsList currentPosition = cablist.get(position);
+            final DetailsList currentPosition = cablist.get(position);
 
-            TextView textViewDays, textViewTotalWage, textViewPaidWage, textViewRemWage,textViewDate,textViewNote;
+            final TextView textViewDays, textViewTotalWage, textViewPaidWage, textViewRemWage,textViewDate,textViewNote;
 
             textViewDate = view.findViewById(R.id.textViewDtDate);
             textViewDays = view.findViewById(R.id.textViewDtDays);
@@ -136,7 +140,47 @@ public class DetailsActivity extends AppCompatActivity {
             textViewRemWage.setText("ಉಳುದ್ದಿದ್ದು : "+String.valueOf(currentPosition.getRem_wages()));
             textViewTotalWage.setText("ಪಗಾರ : "+String.valueOf(currentPosition.getTotal_wages()));
 
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    new AlertDialog.Builder(DetailsActivity.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle(String.valueOf("ಡಿಲಿಟ ಮಾಡಿ?"))
+                            .setMessage("ಈ ಟಿಪ್ಪಣಿಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ??")
+                            .setPositiveButton("ಹೌದು", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    SQLiteDatabase dbb = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
+
+                                    String toBeDeletedString = textViewRemWage.getText().toString();
+                                    int toBeDeleted = Integer.valueOf(toBeDeletedString.substring(14));
+//                                    Cursor cc = dbb.rawQuery("SELECT * FROM member_info",null);
+                                    int toBeUpdated = Integer.valueOf(bal_from_main) - toBeDeleted;
+                                    dbb.execSQL(String.format("UPDATE member_info SET mem_balance = %s WHERE mem_name IS '%s'",toBeUpdated,Name));
+                                    dbb.execSQL(String.format("DELETE FROM '%s' WHERE date IS '%s'",mem_id,String.valueOf(textViewDate.getText())));
+                                    Toast.makeText(mContext, "ಅಳಿಸಲಾಗಿದೆ", Toast.LENGTH_SHORT).show();
+                                    detList.remove(position);
+                                    detailsAdapter.notifyDataSetChanged();
+
+                                }
+
+                            })
+                            .setNegativeButton("ಬೇಡ",null).show();
+
+
+                    return true;
+                }
+            });
+
             return view;
         }
+
+
+    }
+    public void onBackPressed(){
+
+        Intent goToMain = new Intent(DetailsActivity.this,MainActivity.class);
+        startActivity(goToMain);
     }
 }

@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
 
             final TextView textViewName = view.findViewById(R.id.textViewName);
+            final TextView textViewBalance = view.findViewById(R.id.textViewBalance);
+
             textViewName.setText(currentPosition.getLabName());
 
             textViewName.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("ID of Main",mem_id_from_db);
                     goToDet.putExtra("mem_id",String.valueOf(mem_id_from_db));
                     goToDet.putExtra("name",textViewName.getText());
+                    goToDet.putExtra("balance",String.valueOf(textViewBalance.getText()));
 
                     startActivity(goToDet);
 
@@ -136,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-            final TextView textViewBalance = view.findViewById(R.id.textViewBalance);
             int bal = currentPosition.getBalance();
 
             textViewBalance.setText(String.valueOf(currentPosition.getBalance()));
