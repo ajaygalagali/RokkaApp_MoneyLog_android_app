@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -20,15 +21,19 @@
                 android:id="@+id/textViewDtDays"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="125dp"
-                android:text="days" />
+                android:paddingEnd="80dp"
+                android:text="days"
+                android:textColor="#000000"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/textViewDtGiven"
-                android:layout_width="match_parent"
+                android:layout_width="226dp"
                 android:layout_height="match_parent"
-                android:paddingRight="125dp"
-                android:text="paid" />
+                android:paddingEnd="125dp"
+                android:text="paid"
+                android:textColor="#000000"
+                tools:ignore="RtlSymmetry" />
         </TableRow>
 
         <TableRow
@@ -42,15 +47,19 @@
                 android:id="@+id/textViewDtTotalWage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="125dp"
-                android:text="total wage" />
+                android:paddingEnd="80dp"
+                android:text="total wage"
+                android:textColor="#000000"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/textViewDtRem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingRight="125dp"
-                android:text="remaining" />
+                android:paddingEnd="125dp"
+                android:text="remaining"
+                android:textColor="#000000"
+                tools:ignore="RtlSymmetry" />
         </TableRow>
 
     </TableLayout>
@@ -66,9 +75,10 @@
             android:id="@+id/textViewDtNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Notes..."
-            android:ellipsize="end"
-            android:maxLines="1" />
+            android:text="Notes..."/>
+
+<!--            android:ellipsize="end"-->
+<!--            android:maxLines="1" -->
     </TableRow>
 
     <TableRow
@@ -83,7 +93,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="date"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            />
     </TableRow>
 
 </LinearLayout>

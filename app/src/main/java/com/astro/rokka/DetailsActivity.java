@@ -50,6 +50,7 @@ public class DetailsActivity extends AppCompatActivity {
         Intent i = getIntent();
         mem_id = i.getStringExtra("mem_id");
         Name = i.getStringExtra("name");
+        Log.i("name",Name);
         textViewHeading.setText(Name);
 
         detList = new ArrayList<>();

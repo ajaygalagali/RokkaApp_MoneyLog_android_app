@@ -42,6 +42,8 @@ public class AddNewNameActivity extends AppCompatActivity {
 
     public void addNameClicked(View view) {
         SQLiteDatabase db = openOrCreateDatabase("rokk_db", MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
+
         Name = String.valueOf(editTextName.getText());
         if(Name.isEmpty()){
             Toast.makeText(this, "ಹೆಸರು ಬರೆಯಿರಿ ", Toast.LENGTH_SHORT).show();
@@ -71,7 +73,6 @@ public class AddNewNameActivity extends AppCompatActivity {
 
 
 
-                db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
                 db.execSQL(String.format("INSERT INTO member_info (mem_name,mem_balance) VALUES('%s',%s)", Name, balance));
 
 

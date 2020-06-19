@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         listViewMain = findViewById(R.id.listViewMain);
 
         arrayList = new ArrayList<>();
+        arrayList.clear();
 
 
         homeListAdapter = new HomeListAdapter(this,arrayList);
@@ -93,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
         public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
 //            return super.getView(position, convertView, parent);
             View view = convertView;
+            db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
+
 
             view = LayoutInflater.from(mContext).inflate(R.layout.main_row,parent,false);
             HomeList currentPosition = labList.get(position);
@@ -109,8 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent goToDet = new Intent(MainActivity.this,DetailsActivity.class);
 
 
-                    db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
-                    db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
+//                    db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
                     Cursor c = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'", textViewName.getText()),null);
                     Log.i("C","Done");
                     int mem_idIndex = c.getColumnIndex("id");
@@ -126,13 +128,11 @@ public class MainActivity extends AppCompatActivity {
                     goToDet.putExtra("mem_id",String.valueOf(mem_id_from_db));
                     goToDet.putExtra("name",textViewName.getText());
 
-
-
-
                     startActivity(goToDet);
 
                 }
             });
+
 
             final TextView textViewBalance = view.findViewById(R.id.textViewBalance);
             int bal = currentPosition.getBalance();
@@ -157,10 +157,35 @@ public class MainActivity extends AppCompatActivity {
                     Intent goToAdd = new Intent(mContext,plusActivity.class);
                     goToAdd.putExtra("name",String.valueOf(textViewName.getText()));
                     goToAdd.putExtra("currentBalance",String.valueOf(textViewBalance.getText()));
-                    goToAdd.putExtra("position",String.valueOf(v.getTag()));
+                    Cursor c = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'", textViewName.getText()),null);
+                    Log.i("C","Done");
+                    int mem_idIndex = c.getColumnIndex("id");
+
+                    c.moveToFirst();
+                    int j= c.getCount();
+                    for(int i=0;i<j;i++){
+                        mem_id_from_db = String.valueOf(c.getString(mem_idIndex));
+                        c.moveToNext();
+                    }
+                    c.close();
+                    goToAdd.putExtra("position",String.valueOf(mem_id_from_db));
 
                     startActivity(goToAdd);
 
+                }
+            });
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Toast.makeText(mContext, String.valueOf(textViewName.getText()), Toast.LENGTH_SHORT).show();
+                    db.execSQL(String.format("DELETE FROM member_info WHERE mem_name IS '%s'",textViewName.getText().toString()));
+                    Log.i("Deleted","true");
+//                    arrayList.remove(position);
+//                    homeListAdapter.notifyDataSetChanged();
+                    finish();
+                    startActivity(getIntent());
+                    return true;
                 }
             });
 

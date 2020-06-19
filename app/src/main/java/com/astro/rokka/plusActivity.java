@@ -46,7 +46,7 @@ public class plusActivity extends AppCompatActivity {
         currentBalance = i.getStringExtra("currentBalance");
         position = i.getStringExtra("position");
         assert position != null;
-        posiOne = Integer.parseInt(position)+1;
+        posiOne = Integer.parseInt(position);
 
         textViewName = findViewById(R.id.textViewPlus);
         textViewPagar = findViewById(R.id.textViewPagar);

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="10dp"
+    android:foreground="?android:attr/selectableItemBackground"
     android:paddingBottom="10dp">
 
     <TextView
@@ -12,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text=" ಹೆಸರು"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:foreground="?android:attr/selectableItemBackground"
+        />
 
     <TextView
         android:id="@+id/textViewBalance"
@@ -28,6 +31,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="#00AAAAAA"
-        app:srcCompat="@drawable/plus" />
+        app:srcCompat="@drawable/plus"
+        android:foreground="?android:attr/selectableItemBackground"
+        />
 
 </LinearLayout>
