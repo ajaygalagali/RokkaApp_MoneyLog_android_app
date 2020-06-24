@@ -7,17 +7,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddNewNameActivity extends AppCompatActivity {
     EditText editTextName;
@@ -29,24 +36,78 @@ public class AddNewNameActivity extends AppCompatActivity {
     String mem_name_from_db;
     Integer mem_balance_from_db;
 
+    TextView textViewAlertAddMember;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_name);
 
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.mycolor));
+
+
         editTextName = findViewById(R.id.editTextTextPersonName);
         editTextBalance = findViewById(R.id.editTextNumberSigned);
+
+        textViewAlertAddMember = findViewById(R.id.textViewAlertADdMember);
     }
 
+    public static boolean isValidUsername(String name)
+    {
 
+        // Regex to check valid username.
+        String regex = "[^\".\']+";
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+        // If the username is empty
+        // return false
+        if (name == null) {
+            return false;
+        }
+
+        // Pattern class contains matcher() method
+        // to find matching between given username
+        // and regular expression.
+        Matcher m = p.matcher(name);
+
+        // Return if the username
+        // matched the ReGex
+        return m.matches();
+    }
 
     public void addNameClicked(View view) {
         SQLiteDatabase db = openOrCreateDatabase("rokk_db", MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
 
-        Name = String.valueOf(editTextName.getText());
+        Name = String.valueOf(editTextName.getText()).trim();
+        
+        Boolean flagReg = isValidUsername(Name);
+        Log.i("Flag",String.valueOf(flagReg));
+
         if(Name.isEmpty()){
-            Toast.makeText(this, "ಹೆಸರು ಬರೆಯಿರಿ ", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "ಹೆಸರು ಬರೆಯಿರಿ ", Toast.LENGTH_SHORT).show();
+            textViewAlertAddMember.setText("ಹೆಸರು ಬರೆಯಿರಿ");
+            textViewAlertAddMember.setScaleX(0);
+            textViewAlertAddMember.setScaleY(0);
+            textViewAlertAddMember.animate().scaleX(1).setDuration(500);
+            textViewAlertAddMember.animate().scaleY(1).setDuration(500);
+        }else if(!flagReg){
+            textViewAlertAddMember.setText("ಹೆಸರು ಇದನ್ನು ( \" , \' ) ಒಳಗೊಂಡಿರಬಾರದು");
+            textViewAlertAddMember.setScaleX(0);
+            textViewAlertAddMember.setScaleY(0);
+            textViewAlertAddMember.animate().scaleX(1).setDuration(500);
+            textViewAlertAddMember.animate().scaleY(1).setDuration(500);
+
         }else {
 
             @SuppressLint("Recycle") Cursor cc = db.rawQuery("SELECT * FROM member_info",null);
@@ -56,8 +117,8 @@ public class AddNewNameActivity extends AppCompatActivity {
             int size_of_t = cc.getCount();
             for(int i=0;i<size_of_t;i++){
                 String db_mem_name = cc.getString(mem_name_index);
-                Log.i("Member Name",db_mem_name);
-                Log.i("User Input",Name);
+//                Log.i("Member Name",db_mem_name);
+//                Log.i("User Input",Name);
                 if(Name.equalsIgnoreCase(db_mem_name)){
                     Toast.makeText(this, "ಬೆರೆ ಹೆಸರು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
                     flagUsernameCheck = 1;

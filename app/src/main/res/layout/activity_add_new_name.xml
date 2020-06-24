@@ -8,23 +8,20 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="409dp"
-        android:layout_height="72dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#130f40"
         android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingLeft="50dp"
-            android:text="ರೊಕ್ಕ "
-            android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:src="@drawable/ic_bannericon" />
 
     </LinearLayout>
 
@@ -35,7 +32,7 @@
         android:layout_marginTop="22dp"
         android:text="ಹೊಸ ಹೆಸರು ಸೇರಿಸಿ"
         android:textColor="#30336b"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,12 +42,12 @@
         android:id="@+id/editTextTextPersonName"
         android:layout_width="262dp"
         android:layout_height="53dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
         android:hint="ಹೆಸರು ಬರೆಯಿರಿ "
-        android:maxLength="20"
         android:inputType="textPersonName"
+        android:maxLength="15"
         android:paddingLeft="15dp"
         android:paddingTop="10dp"
         android:paddingRight="15dp"
@@ -61,19 +58,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/push_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:background="@drawable/button_bg"
+        android:foreground="?android:attr/selectableItemBackground"
         android:onClick="addNameClicked"
         android:padding="15dp"
         android:text="ಸೇರಿಸಿ"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
         tools:ignore="MissingConstraints" />
@@ -87,14 +84,25 @@
         android:ems="10"
         android:hint="ಬ್ಯಾಲೆನ್ಸ್ ಬರೆಯಿರಿ"
         android:inputType="numberSigned"
+        android:maxLength="6"
         android:paddingLeft="15dp"
         android:paddingTop="10dp"
         android:paddingRight="15dp"
-        android:maxLength="6"
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+    <TextView
+        android:id="@+id/textViewAlertADdMember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:textColor="#D51919"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

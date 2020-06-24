@@ -1,6 +1,7 @@
 package com.astro.rokka;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -25,7 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class plusActivity extends AppCompatActivity {
-    TextView textViewName, textViewPagar,textViewRem;
+    TextView textViewName, textViewPagar,textViewRem, textViewAlertPlus;
     EditText editTextAal, editTextGiven, editTextNote, editTextHalfdayAll,editTextHDP,editTextFDP;
 
 
@@ -41,6 +44,17 @@ public class plusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plus);
 
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.mycolor));
+
         Intent i =getIntent();
         name = i.getStringExtra("name");
         currentBalance = i.getStringExtra("currentBalance");
@@ -51,6 +65,7 @@ public class plusActivity extends AppCompatActivity {
         textViewName = findViewById(R.id.textViewPlus);
         textViewPagar = findViewById(R.id.textViewPagar);
         textViewRem = findViewById(R.id.textViewUlliddidu);
+        textViewAlertPlus = findViewById(R.id.textViewAlertPlus);
 
         editTextAal = findViewById(R.id.editTextaal);
         editTextGiven = findViewById(R.id.editTextKottiddu);
@@ -69,7 +84,14 @@ public class plusActivity extends AppCompatActivity {
         if(tHalfdays.isEmpty() && tHalfPagar.isEmpty()){
 
             if(tFulldays.isEmpty() || tFullPagar.isEmpty()){
-                Toast.makeText(this, "ಸಂಜೆವರೆಗೆ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "ಸಂಜೆವರೆಗೆ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+                textViewAlertPlus.setScaleX(0);
+                textViewAlertPlus.setScaleY(0);
+                textViewAlertPlus.setText("ಸಂಜೆವರೆಗೆ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ");
+                textViewAlertPlus.animate().scaleX(1).setDuration(500);
+                textViewAlertPlus.animate().scaleY(1).setDuration(500);
+                
+
             }else{
                 aal = Integer.parseInt(editTextAal.getText().toString());
 
@@ -82,7 +104,12 @@ public class plusActivity extends AppCompatActivity {
             }
         }else if(tFulldays.isEmpty() && tFullPagar.isEmpty()){
             if(tHalfdays.isEmpty() || tHalfPagar.isEmpty()){
-                Toast.makeText(this, "ಮಧ್ಯಾಹ್ನವರೆಗ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "ಮಧ್ಯಾಹ್ನವರೆಗ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+                textViewAlertPlus.setScaleX(0);
+                textViewAlertPlus.setScaleY(0);
+                textViewAlertPlus.setText("ಮಧ್ಯಾಹ್ನವರೆಗ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ");
+                textViewAlertPlus.animate().scaleX(1).setDuration(500);
+                textViewAlertPlus.animate().scaleY(1).setDuration(500);
             }else{
 
                 halfdays = Integer.parseInt(editTextHalfdayAll.getText().toString());
@@ -94,7 +121,9 @@ public class plusActivity extends AppCompatActivity {
                 return totalPagar;
             }
         } else if(tFullPagar.isEmpty() || tFulldays.isEmpty() || tHalfPagar.isEmpty() || tHalfdays.isEmpty() ) {
-            Toast.makeText(this, "ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+            return 0;
+
         }else{
             Log.i("In cal part","True");
             aal = Integer.parseInt(editTextAal.getText().toString());
@@ -118,10 +147,23 @@ public class plusActivity extends AppCompatActivity {
 
         given = editTextGiven.getText().toString();
         totalPagar = calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar);
-        textViewPagar.setText("ಒಟ್ಟು ಪಗಾರ : + "+String.valueOf(totalPagar));
-        if(given.isEmpty()){
-            Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
-        }else {
+
+
+
+         if(totalPagar == 0){
+            textViewAlertPlus.setScaleX(0);
+            textViewAlertPlus.setScaleY(0);
+            textViewAlertPlus.setText("ಪೆಟ್ಟಿಗೆಯನ್ನು ಭರ್ತಿ ಮಾಡಿ");
+            textViewAlertPlus.animate().scaleX(1).setDuration(500);
+            textViewAlertPlus.animate().scaleY(1).setDuration(500);
+        }else if(given.isEmpty()){
+//            Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+             textViewAlertPlus.setScaleX(0);
+             textViewAlertPlus.setScaleY(0);
+             textViewAlertPlus.setText("ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ");
+             textViewAlertPlus.animate().scaleX(1).setDuration(500);
+             textViewAlertPlus.animate().scaleY(1).setDuration(500);
+         }else {
 
             remPagar = totalPagar - Integer.valueOf(given);
             note = editTextNote.getText().toString();
@@ -167,7 +209,12 @@ public class plusActivity extends AppCompatActivity {
             totalPagar = calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar);
 //            textViewPagar.setText("ಒಟ್ಟು ಪಗಾರ : + "+String.valueOf(totalPagar));
             if(given.isEmpty()){
-                Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+                textViewAlertPlus.setScaleX(0);
+                textViewAlertPlus.setScaleY(0);
+                textViewAlertPlus.setText("ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ");
+                textViewAlertPlus.animate().scaleX(1).setDuration(500);
+                textViewAlertPlus.animate().scaleY(1).setDuration(500);
             }else {
 
                 remPagar = totalPagar - Integer.valueOf(given);

@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
+
     android:foreground="?android:attr/selectableItemBackground"
-    android:paddingBottom="10dp">
+    >
 
     <TextView
         android:id="@+id/textViewName"
@@ -13,8 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text=" ಹೆಸರು"
-        android:textSize="24sp"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginStart="30dp"
         />
 
     <TextView
@@ -23,15 +26,20 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="5000"
-        android:textSize="24sp" />
+
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="20sp" />
 
     <ImageButton
         android:id="@+id/imageButtonPlus"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:padding="10dp"
+        android:layout_marginEnd="20dp"
         android:background="#00AAAAAA"
-        app:srcCompat="@drawable/plus"
+        app:srcCompat="@drawable/ic_baseline_add_circle_outline_24"
+
         android:foreground="?android:attr/selectableItemBackground"
         />
 

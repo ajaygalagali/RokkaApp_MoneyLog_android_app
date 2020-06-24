@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -24,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +41,26 @@ public class MainActivity extends AppCompatActivity {
     String mem_name_from_db;
     Integer mem_balance_from_db;
     String mem_id_from_db;
+
+    ConstraintLayout clMain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(MainActivity.this,R.color.mycolor));
+
         listViewMain = findViewById(R.id.listViewMain);
+        clMain  = findViewById(R.id.constraintLayoutMain);
 
         arrayList = new ArrayList<>();
         arrayList.clear();
@@ -55,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         int mem_NameIndex = c.getColumnIndex("mem_name");
         int mem_balanceIndex = c.getColumnIndex("mem_balance");
-        Log.i("Name Bal", mem_NameIndex +String.valueOf(mem_balanceIndex));
+
 
         c.moveToFirst();
         int j= c.getCount();
@@ -69,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
         c.close();
-
+        if(arrayList.isEmpty()){
+            clMain.setVisibility(View.VISIBLE);
+        }
         listViewMain.setAdapter(homeListAdapter);
 
     }
@@ -108,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
             textViewName.setText(currentPosition.getLabName());
 
-            textViewName.setOnClickListener(new View.OnClickListener() {
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                Log.i("Name",String.valueOf(textViewName.getText()));

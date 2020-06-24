@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -18,6 +20,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,11 +38,13 @@ public class DetailsActivity extends AppCompatActivity {
     TextView textViewHeading;
     ListView listViewDet;
 
-
+    ConstraintLayout clDetails;
 
     int date_index, days_index, paid_wages_index, rem_wages_index, total_wages_index, note_index, halfdays_index;
-    int total_wages,paid_wages, rem_wages,days,halfdays;
-    String date, note,bal_from_main;
+    int total_wages,paid_wages, rem_wages,days, halfdays;
+    String date;
+    String note;
+    int bal_from_db;
 
     static  DetailsAdapter detailsAdapter;
 
@@ -48,15 +54,28 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.mycolor));
+
         listViewDet = findViewById(R.id.listViewDetails);
         textViewHeading = findViewById(R.id.textView5);
+
+        clDetails = findViewById(R.id.clDetails);
 
         Intent i = getIntent();
         mem_id = i.getStringExtra("mem_id");
         Name = i.getStringExtra("name");
-        bal_from_main = i.getStringExtra("balance");
-        Log.i("name",Name);
-        textViewHeading.setText(Name);
+//        bal_from_main = i.getStringExtra("balance");
+//        Log.i("name",Name);
+        textViewHeading.setText("ಹೆಸರು : "+Name);
 
         detList = new ArrayList<>();
         detailsAdapter = new DetailsAdapter(this, detList);
@@ -93,7 +112,9 @@ public class DetailsActivity extends AppCompatActivity {
 
         c.close();
 
-
+        if(detList.isEmpty()){
+            clDetails.setVisibility(View.VISIBLE);
+        }
         listViewDet.setAdapter(detailsAdapter);
 
 
@@ -155,8 +176,16 @@ public class DetailsActivity extends AppCompatActivity {
 
                                     String toBeDeletedString = textViewRemWage.getText().toString();
                                     int toBeDeleted = Integer.valueOf(toBeDeletedString.substring(14));
-//                                    Cursor cc = dbb.rawQuery("SELECT * FROM member_info",null);
-                                    int toBeUpdated = Integer.valueOf(bal_from_main) - toBeDeleted;
+                                    Toast.makeText(mContext,String.valueOf(toBeDeleted), Toast.LENGTH_SHORT).show();
+                                    Cursor cc = dbb.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'",Name),null);
+                                    int bal_from_db_index = cc.getColumnIndex("mem_balance");
+                                    Log.i("Bal Index",String.valueOf(bal_from_db_index));
+                                    cc.moveToFirst();
+                                    bal_from_db = cc.getInt(bal_from_db_index);
+                                    Log.i("blll",String.valueOf(bal_from_db));
+                                    cc.close();
+                                    int toBeUpdated = Integer.valueOf(bal_from_db) - toBeDeleted;
+                                    Toast.makeText(mContext, String.valueOf(toBeUpdated), Toast.LENGTH_SHORT).show();
                                     dbb.execSQL(String.format("UPDATE member_info SET mem_balance = %s WHERE mem_name IS '%s'",toBeUpdated,Name));
                                     dbb.execSQL(String.format("DELETE FROM '%s' WHERE date IS '%s'",mem_id,String.valueOf(textViewDate.getText())));
                                     Toast.makeText(mContext, "ಅಳಿಸಲಾಗಿದೆ", Toast.LENGTH_SHORT).show();

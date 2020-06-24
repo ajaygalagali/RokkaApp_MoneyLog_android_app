@@ -8,45 +8,79 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="409dp"
-        android:layout_height="72dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#130f40"
         android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingLeft="50dp"
-            android:text="ರೊಕ್ಕ "
-            android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="27dp"
+            android:layout_weight="2"
+            android:src="@drawable/ic_bannericon"
+            android:layout_marginRight="180dp" />
 
         <ImageView
             android:id="@+id/imageView4"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="right|end"
-            android:layout_marginLeft="220dp"
-            android:padding="10dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp"
+            android:paddingTop="-5dp"
+            android:paddingBottom="-5dp"
+            android:layout_weight="0.4"
+            android:foreground="?android:attr/selectableItemBackground"
             android:onClick="NewNameClicked"
-            app:srcCompat="@drawable/user_icon" />
+
+            app:srcCompat="@drawable/ic_baseline_person_add_24" />
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="228dp"
+            android:layout_height="330dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/arrow" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ಹೊಸ ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ"
+            android:textColor="#040404"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
         android:id="@+id/listViewMain"
-        android:layout_width="346dp"
-        android:layout_height="608dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+    </ListView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
