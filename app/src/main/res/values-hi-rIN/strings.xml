@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RoKka</string>
+    <string name="mainInstruction">" नए सदस्य जोड़ें"</string>
+    <string name="alertboxTitle">" : हटाना?"</string>
+    <string name="alertboxLine">क्या आप वाकई इसे हटाना चाहते हैं?</string>
+    <string name="alertboxYes">हाँ</string>
+    <string name="alertboxToast">हटाए गए</string>
+    <string name="alertboxNo">नहीं</string>
+    <string name="addMTitle">नया नाम जोड़ें</string>
+    <string name="addMName">नाम दर्ज</string>
+    <string name="addMBal">शेष दर्ज करें</string>
+    <string name="addMBtn">जोड़ना</string>
+    <string name="addMAlertA">" नाम में यह ( \", \' ) नहीं होना चाहिए"</string>
+    <string name="addMAlertB">अलग नाम दर्ज करें</string>
+    <string name="detTitle">"नाम : "</string>
+    <string name="detDays">"दिन (पूर्ण / आधा) : "</string>
+    <string name="detGiven">"भुगतान किया हुआ : "</string>
+    <string name="detRem">" शेष : "</string>
+    <string name="detTotal">"कुल वेतन : "</string>
+    <string name="detAlertboxTitle">हटाएं?</string>
+    <string name="plusFulldays">पूरा दिन</string>
+    <string name="plushalfdays">आधा दिन</string>
+    <string name="plusFullPerday">वेतन / दिन</string>
+    <string name="plusHalfPerday">" वेतन / आधा दिन"</string>
+    <string name="plusGiven">वेतन दिया</string>
+    <string name="plusNote">टिप्पणी</string>
+    <string name="plusAlertA">पूरा दिन / वेतन दर्ज करें</string>
+    <string name="plusAlertB">आधा दिन / वेतन दर्ज करें</string>
+    <string name="plusAlertC">बॉक्स भरें</string>
+    <string name="plusAlertD">दी गई वेतन दर्ज करें</string>
+    <string name="plusTextGiven">"शेष वेतन : "</string>
+    <string name="detInstruction">लेन-देन यहां दिखाए जाएंगे</string>
+    <string name="plusBtn">प्रस्तुत</string>
+    <string name="plusTitle">" को वेतन"</string>
+    <string name="mainInstructionB">भाषा का चयन करें</string>
+</resources>

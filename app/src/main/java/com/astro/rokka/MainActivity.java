@@ -5,19 +5,25 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.textclassifier.TextLanguage;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +37,7 @@ import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     ListView listViewMain;
@@ -42,11 +49,92 @@ public class MainActivity extends AppCompatActivity {
     Integer mem_balance_from_db;
     String mem_id_from_db;
 
+    //Multi Language Support
+
+    Spinner spinnerLang;
+    String currentLanguage , currentLang;
+    Locale myLocale;
+
     ConstraintLayout clMain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
+        //Multi Lang Support
+        db.execSQL("CREATE TABLE IF NOT EXISTS lang(id INTEGER PRIMARY KEY AUTOINCREMENT,currentlang VARCHAR)");
+        Cursor cursor = db.rawQuery("SELECT * FROM lang",null);
+        cursor.moveToFirst();
+        if(cursor.getCount() == 0){
+            db.execSQL("INSERT INTO lang(currentlang) VALUES('en')");
+            currentLanguage = "en";
+        }else{
+            currentLanguage = cursor.getString(1);
+//            setLocaleOnCreate(currentLanguage);
+//            Log.i("Current Language from DB",currentLanguage);
+
+        }
+        setLocaleOnCreate(currentLanguage);
+        cursor.close();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+//        currentLanguage = getIntent().getStringExtra(currentLang);
+        spinnerLang = findViewById(R.id.spinnerLanguage);
+        List<String> list = new ArrayList<String>();
+
+        list.add("Select Language");
+        list.add("English");
+        list.add("ಕನ್ನಡ");
+        list.add("हिन्दी");
+        ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLang.setAdapter(spinner_adapter);
+
+        spinnerLang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+
+                        db.execSQL("UPDATE lang SET currentlang = 'en' WHERE id IS 1");
+                        setLocale("en");
+                        break;
+
+                    case 2:
+
+                        db.execSQL("UPDATE lang SET currentlang = 'kn' WHERE id IS 1");
+                        Log.i("Updated to Kannada","True");
+                        setLocale("kn");
+                        break;
+
+                    case 3:
+                        db.execSQL("UPDATE lang SET currentlang = 'hi' WHERE id IS 1");
+                        setLocale("hi");
+
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
+
+
+
+
+
+
+
 
         Window window = this.getWindow();
 
@@ -67,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         homeListAdapter = new HomeListAdapter(this,arrayList);
-        db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
+
         db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
         Cursor c = db.rawQuery("SELECT * FROM member_info",null);
 
@@ -95,10 +183,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLanguage)) {
+            myLocale = new Locale(localeName);
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+//            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        } else {
+            Toast.makeText(MainActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void setLocaleOnCreate(String localeName) {
+
+            myLocale = new Locale(localeName);
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+
+
+    }
+
+
     public void NewNameClicked(View view) {
         Intent goToAdd = new Intent(MainActivity.this,AddNewNameActivity.class);
         startActivity(goToAdd);
     }
+
+
+
     public class HomeListAdapter extends ArrayAdapter<HomeList>{
 
         private Context mContext;
@@ -138,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                    db.execSQL("CREATE TABLE IF NOT EXISTS member_info (id INTEGER PRIMARY KEY AUTOINCREMENT,mem_name VARCHAR, mem_balance INT)");
                     Cursor c = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'", textViewName.getText()),null);
-                    Log.i("C","Done");
+
                     int mem_idIndex = c.getColumnIndex("id");
 
                     c.moveToFirst();
@@ -148,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                         c.moveToNext();
                     }
                     c.close();
-                    Log.i("ID of Main",mem_id_from_db);
+
                     goToDet.putExtra("mem_id",String.valueOf(mem_id_from_db));
                     goToDet.putExtra("name",textViewName.getText());
                     goToDet.putExtra("balance",String.valueOf(textViewBalance.getText()));
@@ -182,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
                     goToAdd.putExtra("name",String.valueOf(textViewName.getText()));
                     goToAdd.putExtra("currentBalance",String.valueOf(textViewBalance.getText()));
                     Cursor c = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'", textViewName.getText()),null);
-                    Log.i("C","Done");
+
                     int mem_idIndex = c.getColumnIndex("id");
 
                     c.moveToFirst();
@@ -206,13 +326,13 @@ public class MainActivity extends AppCompatActivity {
 
                     new AlertDialog.Builder(MainActivity.this)
                             .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setTitle(String.valueOf(textViewName.getText()+" : ಡಿಲಿಟ ಮಾಡಿ?"))
-                            .setMessage("ಈ ಟಿಪ್ಪಣಿಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ??")
-                            .setPositiveButton("ಹೌದು", new DialogInterface.OnClickListener() {
+                            .setTitle(String.valueOf(textViewName.getText()+getString(R.string.alertboxTitle)))
+                            .setMessage(getString(R.string.alertboxLine))
+                            .setPositiveButton(getString(R.string.alertboxYes), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     db.execSQL(String.format("DELETE FROM member_info WHERE mem_name IS '%s'",textViewName.getText().toString()));
-                                    Toast.makeText(mContext, "ಅಳಿಸಲಾಗಿದೆ", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, getString(R.string.alertboxToast), Toast.LENGTH_SHORT).show();
                                     arrayList.remove(position);
                                     homeListAdapter.notifyDataSetChanged();
 //                                    finish();
@@ -220,7 +340,8 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                             })
-                            .setNegativeButton("ಬೇಡ",null).show();
+                            .setNegativeButton(getString(R.string.alertboxNo),null).show();
+
 
 
 

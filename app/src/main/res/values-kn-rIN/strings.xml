@@ -1,0 +1,51 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">ರೊಕ್ಕ</string>
+    <!--    Main Activity-->
+    <string name="mainInstruction" tools:ignore="MissingTranslation"> ಹೊಸ ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ</string>
+
+    <!--    AlertBox-->
+    <string name="alertboxTitle" tools:ignore="MissingTranslation"> : ಡಿಲಿಟ ಮಾಡಿ?</string>
+    <string name="alertboxLine" tools:ignore="MissingTranslation">ಇದನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?</string>
+    <string name="alertboxYes" tools:ignore="MissingTranslation">ಹೌದು</string>
+    <string name="alertboxToast" tools:ignore="MissingTranslation">ಅಳಿಸಲಾಗಿದೆ</string>
+    <string name="alertboxNo" tools:ignore="MissingTranslation">ಬೇಡ</string>
+
+    <!--    Add new member-->
+    <string name="addMTitle" tools:ignore="MissingTranslation">ಹೊಸ ಹೆಸರು ಸೇರಿಸಿ</string>
+    <string name="addMName" tools:ignore="MissingTranslation">ಹೆಸರು ಬರೆಯಿರಿ</string>
+    <string name="addMBal" tools:ignore="MissingTranslation">ಬ್ಯಾಲೆನ್ಸ್ ಬರೆಯಿರಿ</string>
+    <string name="addMBtn" tools:ignore="MissingTranslation">ಸೇರಿಸಿ</string>
+
+    <string name="addMAlertA" tools:ignore="MissingTranslation">ಹೆಸರು ಇದನ್ನು ( \" , \' ) ಒಳಗೊಂಡಿರಬಾರದು</string>
+    <string name="addMAlertB" tools:ignore="MissingTranslation">ವಿಭಿನ್ನ ಹೆಸರನ್ನು ಬರೆಯಿರಿ</string>
+
+
+
+    <!--Details Activity-->
+    <string name="detTitle" tools:ignore="MissingTranslation">ಹೆಸರು : </string>
+    <string name="detDays" tools:ignore="MissingTranslation">ದಿನಗಳು (ಪೂರ್ಣ/ಅರ್ಧ) : </string>
+    <string name="detGiven" tools:ignore="MissingTranslation">"ಪಾವತಿಸಲಾಗಿದೆ : "</string>
+    <string name="detRem" tools:ignore="MissingTranslation">" ಉಳಿದ : "</string>
+    <string name="detTotal" tools:ignore="MissingTranslation">ಒಟ್ಟು ವೇತನ : </string>
+    <string name="detAlertboxTitle" tools:ignore="MissingTranslation">ಡಿಲಿಟ ಮಾಡಿ?</string>
+    <string name="detInstruction" tools:ignore="MissingTranslation">ವಹಿವಾಟುಗಳನ್ನು ಇಲ್ಲಿ ತೋರಿಸಲಾಗುತ್ತದೆ</string>
+
+    <!--    plus Activity-->
+    <string name="plusFulldays" tools:ignore="MissingTranslation">ಪೂರ್ಣ ದಿನಗಳು</string>
+    <string name="plushalfdays" tools:ignore="MissingTranslation">ಅರ್ಧ ದಿನಗಳು</string>
+    <string name="plusFullPerday" tools:ignore="MissingTranslation">ವೇತನ/ದಿನ</string>
+    <string name="plusHalfPerday" tools:ignore="MissingTranslation">ವೇತನ/ಅರ್ಧ ದಿನ</string>
+    <string name="plusGiven" tools:ignore="MissingTranslation">ವೇತನ ಕೊಟ್ಟುದ್ದು</string>
+    <string name="plusNote" tools:ignore="MissingTranslation">ಟಿಪ್ಪಣಿಗಳು</string>
+    <string name="plusBtn" tools:ignore="MissingTranslation">ಸಲ್ಲಿಸು</string>
+
+    <string name="plusAlertA" tools:ignore="MissingTranslation">ಪೂರ್ಣ ದಿನಗಳು/ವೇತನ ಬರೆಯಿರಿ</string>
+    <string name="plusAlertB" tools:ignore="MissingTranslation">ಅರ್ಧ ದಿನಗಳು/ವೇತನ ಬರೆಯಿರಿ</string>
+    <string name="plusAlertC" tools:ignore="MissingTranslation">ಪೆಟ್ಟಿಗೆಯನ್ನು ಭರ್ತಿ ಮಾಡಿ</string>
+    <string name="plusAlertD" tools:ignore="MissingTranslation">ವೇತನ ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ</string>
+    <string name="plusTextGiven" tools:ignore="MissingTranslation">ವೇತನ ಉಳುದ್ದಿದ್ದು : </string>
+    <string name="plusTitle">ಗೆ ಪಾವತಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="mainInstructionB">ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+
+
+</resources>

@@ -41,7 +41,7 @@ public class DetailsActivity extends AppCompatActivity {
     ConstraintLayout clDetails;
 
     int date_index, days_index, paid_wages_index, rem_wages_index, total_wages_index, note_index, halfdays_index;
-    int total_wages,paid_wages, rem_wages,days, halfdays;
+    int total_wages,paid_wages, rem_wages,days, halfdays, rem_from_db;
     String date;
     String note;
     int bal_from_db;
@@ -49,6 +49,7 @@ public class DetailsActivity extends AppCompatActivity {
     static  DetailsAdapter detailsAdapter;
 
     static ArrayList<DetailsList> detList;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +74,8 @@ public class DetailsActivity extends AppCompatActivity {
         Intent i = getIntent();
         mem_id = i.getStringExtra("mem_id");
         Name = i.getStringExtra("name");
-//        bal_from_main = i.getStringExtra("balance");
-//        Log.i("name",Name);
-        textViewHeading.setText("ಹೆಸರು : "+Name);
+
+        textViewHeading.setText(getString(R.string.detTitle)+Name);
 
         detList = new ArrayList<>();
         detailsAdapter = new DetailsAdapter(this, detList);
@@ -136,7 +136,7 @@ public class DetailsActivity extends AppCompatActivity {
             cablist =list;
         }
 
-        @SuppressLint("ViewHolder")
+        @SuppressLint({"ViewHolder", "SetTextI18n"})
         @NonNull
         @Override
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -155,11 +155,12 @@ public class DetailsActivity extends AppCompatActivity {
             textViewTotalWage = view.findViewById(R.id.textViewDtTotalWage);
 
             textViewDate.setText(currentPosition.getTime());
-            textViewDays.setText("ದಿನಗಳು (ಪೂರ್ಣ/ಅರ್ಧ) : "+String.valueOf(currentPosition.getDays())+" / "+String.valueOf(currentPosition.getHalfdays()));
+            textViewDays.setText(getString(R.string.detDays)+String.valueOf(currentPosition.getDays())+" / "+String.valueOf(currentPosition.getHalfdays()));
             textViewNote.setText(currentPosition.getNote());
-            textViewPaidWage.setText("ಕೊಟ್ಟುದ್ದು : "+String.valueOf(currentPosition.getPaid_wages()));
-            textViewRemWage.setText("ಉಳುದ್ದಿದ್ದು : "+String.valueOf(currentPosition.getRem_wages()));
-            textViewTotalWage.setText("ವೇತನ/ದಿನ : "+String.valueOf(currentPosition.getTotal_wages()));
+            textViewPaidWage.setText(getString((R.string.detGiven))+String.valueOf(currentPosition.getPaid_wages()));
+
+            textViewRemWage.setText(getString(R.string.detRem)+String.valueOf(currentPosition.getRem_wages()));
+            textViewTotalWage.setText(getString(R.string.detTotal)+String.valueOf(currentPosition.getTotal_wages()));
 
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -167,35 +168,40 @@ public class DetailsActivity extends AppCompatActivity {
 
                     new AlertDialog.Builder(DetailsActivity.this)
                             .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setTitle(String.valueOf("ಡಿಲಿಟ ಮಾಡಿ?"))
-                            .setMessage("ಈ ಟಿಪ್ಪಣಿಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ??")
-                            .setPositiveButton("ಹೌದು", new DialogInterface.OnClickListener() {
+                            .setTitle(getString(R.string.detAlertboxTitle))
+                            .setMessage(getString(R.string.alertboxLine))
+                            .setPositiveButton(getString(R.string.alertboxYes), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     SQLiteDatabase dbb = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
 
-                                    String toBeDeletedString = textViewRemWage.getText().toString();
-                                    int toBeDeleted = Integer.valueOf(toBeDeletedString.substring(14));
-                                    Toast.makeText(mContext,String.valueOf(toBeDeleted), Toast.LENGTH_SHORT).show();
+//                                    String toBeDeletedString = textViewRemWage.getText().toString();
+                                    Cursor ccc = dbb.rawQuery(String.format("SELECT * FROM '%s' WHERE date IS '%s'",mem_id,String.valueOf(textViewDate.getText())),null);
+                                    int rem_index = ccc.getColumnIndex("rem_wages");
+                                    ccc.moveToFirst();
+                                    rem_from_db = ccc.getInt(rem_wages_index);
+                                    ccc.close();
+
+
                                     Cursor cc = dbb.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'",Name),null);
                                     int bal_from_db_index = cc.getColumnIndex("mem_balance");
-                                    Log.i("Bal Index",String.valueOf(bal_from_db_index));
+
                                     cc.moveToFirst();
                                     bal_from_db = cc.getInt(bal_from_db_index);
-                                    Log.i("blll",String.valueOf(bal_from_db));
+
                                     cc.close();
-                                    int toBeUpdated = Integer.valueOf(bal_from_db) - toBeDeleted;
-                                    Toast.makeText(mContext, String.valueOf(toBeUpdated), Toast.LENGTH_SHORT).show();
+                                    int toBeUpdated = Integer.valueOf(bal_from_db) - rem_from_db;
+
                                     dbb.execSQL(String.format("UPDATE member_info SET mem_balance = %s WHERE mem_name IS '%s'",toBeUpdated,Name));
                                     dbb.execSQL(String.format("DELETE FROM '%s' WHERE date IS '%s'",mem_id,String.valueOf(textViewDate.getText())));
-                                    Toast.makeText(mContext, "ಅಳಿಸಲಾಗಿದೆ", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, getString(R.string.alertboxToast), Toast.LENGTH_SHORT).show();
                                     detList.remove(position);
                                     detailsAdapter.notifyDataSetChanged();
 
                                 }
 
                             })
-                            .setNegativeButton("ಬೇಡ",null).show();
+                            .setNegativeButton(getString(R.string.alertboxNo),null).show();
 
 
                     return true;

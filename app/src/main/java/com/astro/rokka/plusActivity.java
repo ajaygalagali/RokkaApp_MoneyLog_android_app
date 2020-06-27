@@ -74,7 +74,7 @@ public class plusActivity extends AppCompatActivity {
         editTextFDP = findViewById(R.id.editTextPagarFD);
         editTextHDP = findViewById(R.id.editTextPagarHD);
 
-        textViewName.setText(name+" ಜಮಾ");
+        textViewName.setText(name+getString(R.string.plusTitle));
 
 
 
@@ -87,7 +87,7 @@ public class plusActivity extends AppCompatActivity {
 //                Toast.makeText(this, "ಸಂಜೆವರೆಗೆ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
                 textViewAlertPlus.setScaleX(0);
                 textViewAlertPlus.setScaleY(0);
-                textViewAlertPlus.setText("ಪೂರ್ಣ ದಿನಗಳು/ವೇತನ ಬರೆಯಿರಿ");
+                textViewAlertPlus.setText(getString(R.string.plusAlertA));
                 textViewAlertPlus.animate().scaleX(1).setDuration(500);
                 textViewAlertPlus.animate().scaleY(1).setDuration(500);
                 
@@ -107,7 +107,7 @@ public class plusActivity extends AppCompatActivity {
 //                Toast.makeText(this, "ಮಧ್ಯಾಹ್ನವರೆಗ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
                 textViewAlertPlus.setScaleX(0);
                 textViewAlertPlus.setScaleY(0);
-                textViewAlertPlus.setText("ಅರ್ಧ ದಿನಗಳು/ವೇತನ ಬರೆಯಿರಿ");
+                textViewAlertPlus.setText(getString(R.string.plusAlertB));
                 textViewAlertPlus.animate().scaleX(1).setDuration(500);
                 textViewAlertPlus.animate().scaleY(1).setDuration(500);
             }else{
@@ -125,7 +125,7 @@ public class plusActivity extends AppCompatActivity {
             return 0;
 
         }else{
-            Log.i("In cal part","True");
+
             aal = Integer.parseInt(editTextAal.getText().toString());
             halfdays = Integer.parseInt(editTextHalfdayAll.getText().toString());
             hd_rate = Integer.parseInt(editTextHDP.getText().toString());
@@ -153,14 +153,14 @@ public class plusActivity extends AppCompatActivity {
          if(totalPagar == 0){
             textViewAlertPlus.setScaleX(0);
             textViewAlertPlus.setScaleY(0);
-            textViewAlertPlus.setText("ಪೆಟ್ಟಿಗೆಯನ್ನು ಭರ್ತಿ ಮಾಡಿ");
+            textViewAlertPlus.setText(getString(R.string.plusAlertC));
             textViewAlertPlus.animate().scaleX(1).setDuration(500);
             textViewAlertPlus.animate().scaleY(1).setDuration(500);
         }else if(given.isEmpty()){
 //            Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
              textViewAlertPlus.setScaleX(0);
              textViewAlertPlus.setScaleY(0);
-             textViewAlertPlus.setText("ವೇತನ ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ");
+             textViewAlertPlus.setText(getString(R.string.plusAlertD));
              textViewAlertPlus.animate().scaleX(1).setDuration(500);
              textViewAlertPlus.animate().scaleY(1).setDuration(500);
          }else {
@@ -175,10 +175,10 @@ public class plusActivity extends AppCompatActivity {
 
             db = openOrCreateDatabase("rokk_db", MODE_PRIVATE, null);
             db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s", updatedBalance, posiOne));
-            Log.i("Table 1", "Updated");
+
 
             db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages,halfdays) VALUES('%s',%s,%s,%s,'%s',%s,%s)", posiOne, stringTime, aal, Integer.valueOf(given), remPagar, note, totalPagar, halfdays));
-            Log.i("Table 2", "Inserted");
+
             Intent goToMain = new Intent(plusActivity.this, MainActivity.class);
 
             startActivity(goToMain);
@@ -194,7 +194,7 @@ public class plusActivity extends AppCompatActivity {
         tFullPagar = editTextFDP.getText().toString();
         tHalfPagar = editTextHDP.getText().toString();
 
-        textViewPagar.setText("ಒಟ್ಟು ವೇತನ : "+String.valueOf(calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar)));
+        textViewPagar.setText(getString(R.string.detTotal)+String.valueOf(calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar)));
 
     }
 
@@ -212,13 +212,13 @@ public class plusActivity extends AppCompatActivity {
 //                Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
                 textViewAlertPlus.setScaleX(0);
                 textViewAlertPlus.setScaleY(0);
-                textViewAlertPlus.setText("ವೇತನ ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ");
+                textViewAlertPlus.setText(getString(R.string.plusAlertD));
                 textViewAlertPlus.animate().scaleX(1).setDuration(500);
                 textViewAlertPlus.animate().scaleY(1).setDuration(500);
             }else {
 
                 remPagar = totalPagar - Integer.valueOf(given);
-                textViewRem.setText("ವೇತನ ಉಳುದ್ದಿದ್ದು : " + String.valueOf(remPagar));
+                textViewRem.setText(getString(R.string.plusTextGiven) + String.valueOf(remPagar));
             }
 
     }

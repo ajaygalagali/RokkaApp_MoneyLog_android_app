@@ -25,6 +25,19 @@
             android:src="@drawable/ic_bannericon"
             android:layout_marginRight="180dp" />
 
+
+        <Spinner
+            android:id="@+id/spinnerLanguage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp"
+            android:paddingTop="-5dp"
+            android:paddingBottom="-5dp"
+            android:layout_weight="0.4"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:background="@drawable/ic_baseline_language_24"/>
+
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="0dp"
@@ -43,33 +56,86 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="228dp"
-            android:layout_height="330dp"
+            android:id="@+id/imageView5"
+            android:layout_width="207dp"
+            android:layout_height="235dp"
+            android:alpha="0.3"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.857"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/arrow" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ಹೊಸ ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ"
-            android:textColor="#040404"
-            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:gravity="center">
+
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+
+                    app:srcCompat="@drawable/ic_baseline_person_add_48" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/mainInstruction"
+                    android:textColor="#A4A4A4"
+
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+
+                <ImageView
+                    android:id="@+id/imageView44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:srcCompat="@drawable/ic_baseline_language_48" />
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/mainInstructionB"
+                    android:textColor="#A4A4A4"
+
+                    android:textSize="24sp" />
+            </TableRow>
+
+        </TableLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

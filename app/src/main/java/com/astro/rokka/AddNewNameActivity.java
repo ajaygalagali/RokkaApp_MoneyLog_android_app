@@ -92,17 +92,17 @@ public class AddNewNameActivity extends AppCompatActivity {
         Name = String.valueOf(editTextName.getText()).trim();
         
         Boolean flagReg = isValidUsername(Name);
-        Log.i("Flag",String.valueOf(flagReg));
+
 
         if(Name.isEmpty()){
 //            Toast.makeText(this, "ಹೆಸರು ಬರೆಯಿರಿ ", Toast.LENGTH_SHORT).show();
-            textViewAlertAddMember.setText("ಹೆಸರು ಬರೆಯಿರಿ");
+            textViewAlertAddMember.setText(getString(R.string.addMName));
             textViewAlertAddMember.setScaleX(0);
             textViewAlertAddMember.setScaleY(0);
             textViewAlertAddMember.animate().scaleX(1).setDuration(500);
             textViewAlertAddMember.animate().scaleY(1).setDuration(500);
         }else if(!flagReg){
-            textViewAlertAddMember.setText("ಹೆಸರು ಇದನ್ನು ( \" , \' ) ಒಳಗೊಂಡಿರಬಾರದು");
+            textViewAlertAddMember.setText(getString(R.string.addMAlertA));
             textViewAlertAddMember.setScaleX(0);
             textViewAlertAddMember.setScaleY(0);
             textViewAlertAddMember.animate().scaleX(1).setDuration(500);
@@ -120,7 +120,11 @@ public class AddNewNameActivity extends AppCompatActivity {
 //                Log.i("Member Name",db_mem_name);
 //                Log.i("User Input",Name);
                 if(Name.equalsIgnoreCase(db_mem_name)){
-                    Toast.makeText(this, "ಬೆರೆ ಹೆಸರು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
+                    textViewAlertAddMember.setText(getString(R.string.addMAlertB));
+                    textViewAlertAddMember.setScaleX(0);
+                    textViewAlertAddMember.setScaleY(0);
+                    textViewAlertAddMember.animate().scaleX(1).setDuration(500);
+                    textViewAlertAddMember.animate().scaleY(1).setDuration(500);
                     flagUsernameCheck = 1;
                     break;
                 }
@@ -148,7 +152,7 @@ public class AddNewNameActivity extends AppCompatActivity {
 
                 //CREATING TABLE 2
                 db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,days INT,total_wages INT,paid_wages INT,rem_wages INT,date VARCHAR,note VARCHAR,halfdays INT)", mem_id_from_db));
-                Log.i("Table 2 ", "Created");
+
 
                 MainActivity.homeListAdapter.notifyDataSetChanged();
                 Intent goToMain = new Intent(AddNewNameActivity.this, MainActivity.class);
