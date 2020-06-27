@@ -87,7 +87,7 @@ public class plusActivity extends AppCompatActivity {
 //                Toast.makeText(this, "ಸಂಜೆವರೆಗೆ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
                 textViewAlertPlus.setScaleX(0);
                 textViewAlertPlus.setScaleY(0);
-                textViewAlertPlus.setText("ಸಂಜೆವರೆಗೆ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ");
+                textViewAlertPlus.setText("ಪೂರ್ಣ ದಿನಗಳು/ವೇತನ ಬರೆಯಿರಿ");
                 textViewAlertPlus.animate().scaleX(1).setDuration(500);
                 textViewAlertPlus.animate().scaleY(1).setDuration(500);
                 
@@ -107,7 +107,7 @@ public class plusActivity extends AppCompatActivity {
 //                Toast.makeText(this, "ಮಧ್ಯಾಹ್ನವರೆಗ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
                 textViewAlertPlus.setScaleX(0);
                 textViewAlertPlus.setScaleY(0);
-                textViewAlertPlus.setText("ಮಧ್ಯಾಹ್ನವರೆಗ ಆಳ/ಪಗಾರ ಬರೆಯಿರಿ");
+                textViewAlertPlus.setText("ಅರ್ಧ ದಿನಗಳು/ವೇತನ ಬರೆಯಿರಿ");
                 textViewAlertPlus.animate().scaleX(1).setDuration(500);
                 textViewAlertPlus.animate().scaleY(1).setDuration(500);
             }else{
@@ -160,7 +160,7 @@ public class plusActivity extends AppCompatActivity {
 //            Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
              textViewAlertPlus.setScaleX(0);
              textViewAlertPlus.setScaleY(0);
-             textViewAlertPlus.setText("ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ");
+             textViewAlertPlus.setText("ವೇತನ ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ");
              textViewAlertPlus.animate().scaleX(1).setDuration(500);
              textViewAlertPlus.animate().scaleY(1).setDuration(500);
          }else {
@@ -194,7 +194,7 @@ public class plusActivity extends AppCompatActivity {
         tFullPagar = editTextFDP.getText().toString();
         tHalfPagar = editTextHDP.getText().toString();
 
-        textViewPagar.setText("ಒಟ್ಟು ಪಗಾರ : "+String.valueOf(calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar)));
+        textViewPagar.setText("ಒಟ್ಟು ವೇತನ : "+String.valueOf(calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar)));
 
     }
 
@@ -212,13 +212,13 @@ public class plusActivity extends AppCompatActivity {
 //                Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
                 textViewAlertPlus.setScaleX(0);
                 textViewAlertPlus.setScaleY(0);
-                textViewAlertPlus.setText("ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ");
+                textViewAlertPlus.setText("ವೇತನ ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ");
                 textViewAlertPlus.animate().scaleX(1).setDuration(500);
                 textViewAlertPlus.animate().scaleY(1).setDuration(500);
             }else {
 
                 remPagar = totalPagar - Integer.valueOf(given);
-                textViewRem.setText("ಉಳುದ್ದಿದ್ದು : " + String.valueOf(remPagar));
+                textViewRem.setText("ವೇತನ ಉಳುದ್ದಿದ್ದು : " + String.valueOf(remPagar));
             }
 
     }

@@ -163,9 +163,9 @@ public class MainActivity extends AppCompatActivity {
 
             textViewBalance.setText(String.valueOf(currentPosition.getBalance()));
             if(bal < 0){
-                textViewBalance.setTextColor(Color.RED);
-            }else{
                 textViewBalance.setTextColor(Color.GREEN);
+            }else{
+                textViewBalance.setTextColor(Color.RED);
             }
 
 

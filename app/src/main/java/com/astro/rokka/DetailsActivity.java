@@ -155,11 +155,11 @@ public class DetailsActivity extends AppCompatActivity {
             textViewTotalWage = view.findViewById(R.id.textViewDtTotalWage);
 
             textViewDate.setText(currentPosition.getTime());
-            textViewDays.setText("ಆಳ : "+String.valueOf(currentPosition.getDays())+" / "+String.valueOf(currentPosition.getHalfdays()));
+            textViewDays.setText("ದಿನಗಳು (ಪೂರ್ಣ/ಅರ್ಧ) : "+String.valueOf(currentPosition.getDays())+" / "+String.valueOf(currentPosition.getHalfdays()));
             textViewNote.setText(currentPosition.getNote());
             textViewPaidWage.setText("ಕೊಟ್ಟುದ್ದು : "+String.valueOf(currentPosition.getPaid_wages()));
             textViewRemWage.setText("ಉಳುದ್ದಿದ್ದು : "+String.valueOf(currentPosition.getRem_wages()));
-            textViewTotalWage.setText("ಪಗಾರ : "+String.valueOf(currentPosition.getTotal_wages()));
+            textViewTotalWage.setText("ವೇತನ/ದಿನ : "+String.valueOf(currentPosition.getTotal_wages()));
 
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
