@@ -1,7 +1,7 @@
 ## rokkaApp_MoneyLog_android_app
-### v1.2 completed
+### v1.4.3 completed
 
-This app helps you to keep track money lent to friends/workers. User Interface of App is in Kannada, Hindi and English Language. I started this project as my dad was looking for an app which tracks the wages paid to workers.. I started this project as my dad was looking for an app which tracks the wages paid to workers.
+This app helps you to keep track wages paid to workers. User Interface of App is in Kannada, Hindi and English Language. I started this project as my dad was looking for an app which tracks the wages paid to workers.
 #### Features 
 
 - Calculate total wage

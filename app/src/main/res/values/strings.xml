@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RoKka</string>
+
     <string name="mainInstruction">Add New Members</string>
     <string name="mainInstructionB">Select Language</string>
     <string name="alertboxTitle">: Delete?</string>
@@ -36,3 +37,6 @@
     <string name="plusTextGiven">"Remaining Wage : "</string>
     <string name="detInstruction">" Transactions are shown here"</string>
 </resources>
+
+
+

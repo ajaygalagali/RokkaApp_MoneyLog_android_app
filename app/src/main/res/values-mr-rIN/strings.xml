@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RoKka</string>
+    <string name="mainInstruction">नवीन सदस्य जोडा</string>
+    <string name="mainInstructionB">भाषा निवडा</string>
+    <string name="alertboxTitle">" : हटवा ?"</string>
+    <string name="alertboxLine">आपली खात्री आहे की आपण हे हटवू इच्छिता?</string>
+    <string name="alertboxYes">होय</string>
+    <string name="alertboxToast">हटविले</string>
+    <string name="alertboxNo">नाही</string>
+    <string name="addMTitle">नवीन नाव जोडा</string>
+    <string name="addMName">नाव प्रविष्ट करा</string>
+    <string name="addMBal">शिल्लक प्रविष्ट करा</string>
+    <string name="addMBtn">जोडा</string>
+    <string name="addMAlertA">नावात हे ( \", \' ) नसावे</string>
+    <string name="addMAlertB">भिन्न नाव प्रविष्ट करा</string>
+    <string name="detTitle">"नाव : "</string>
+    <string name="detDays">"दिवस (पूर्ण / अर्धा) : "</string>
+    <string name="detGiven">"पैसे दिले : "</string>
+    <string name="detRem">"उर्वरित : "</string>
+    <string name="detTotal">"एकूण वेतन : "</string>
+    <string name="detAlertboxTitle">हटवा?</string>
+    <string name="plusFulldays">पूर्ण दिवस</string>
+    <string name="plushalfdays">अर्धे दिवस</string>
+    <string name="plusFullPerday">वेतन / दिवस</string>
+    <string name="plusHalfPerday">वेतन / अर्धा दिवस</string>
+    <string name="plusGiven">वेतन दिली</string>
+    <string name="plusNote">टिप्पणी</string>
+    <string name="plusBtn">प्रस्तुत</string>
+    <string name="plusTitle">देय द्या</string>
+    <string name="plusAlertA">पूर्ण दिवस / वेतन प्रविष्ट करा</string>
+    <string name="plusAlertB">अर्धे दिवस / वेतन प्रविष्ट करा</string>
+    <string name="plusAlertC">बॉक्स भरा</string>
+    <string name="plusAlertD">वेतन अदा करा</string>
+    <string name="plusTextGiven">"शिल्लक वेतन : "</string>
+    <string name="detInstruction">व्यवहार येथे दर्शविले आहेत</string>
+</resources>

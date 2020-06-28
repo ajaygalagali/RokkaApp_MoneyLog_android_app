@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         list.add("English");
         list.add("ಕನ್ನಡ");
         list.add("हिन्दी");
+        list.add("मराठी");
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLang.setAdapter(spinner_adapter);
@@ -109,13 +110,18 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
 
                         db.execSQL("UPDATE lang SET currentlang = 'kn' WHERE id IS 1");
-                        Log.i("Updated to Kannada","True");
                         setLocale("kn");
                         break;
 
                     case 3:
                         db.execSQL("UPDATE lang SET currentlang = 'hi' WHERE id IS 1");
                         setLocale("hi");
+
+                        break;
+
+                    case 4:
+                        db.execSQL("UPDATE lang SET currentlang = 'mr' WHERE id IS 1");
+                        setLocale("mr");
 
                         break;
 
