@@ -129,12 +129,12 @@ public class DetailsActivity extends AppCompatActivity {
         private Context mContext;
         private List<DetailsList> cablist = new ArrayList<>();
 
-        public DetailsAdapter(@NonNull Context context, @SuppressLint("SupportAnnotationUsage") @LayoutRes ArrayList<DetailsList> list) {
-            super(context, 0 , list);
+            public DetailsAdapter(@NonNull Context context, @SuppressLint("SupportAnnotationUsage") @LayoutRes ArrayList<DetailsList> list) {
+                super(context, 0 , list);
 
-            mContext = context;
-            cablist =list;
-        }
+                mContext = context;
+                cablist =list;
+            }
 
         @SuppressLint({"ViewHolder", "SetTextI18n"})
         @NonNull

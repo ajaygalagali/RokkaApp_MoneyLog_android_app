@@ -36,6 +36,26 @@
     <string name="plusAlertD">Enter Wage Paid</string>
     <string name="plusTextGiven">"Remaining Wage : "</string>
     <string name="detInstruction">" Transactions are shown here"</string>
+
+    <!--    OthersActivity-->
+
+    <string name="oAddNewTitle">Add New Member</string>
+
+    <string name="oPlusTitle">Credit</string>
+    <string name="oMinusTitle">Debit</string>
+    <string name="oPlusAmt">Enter Amount</string>
+    <string name="oPlusBtn">Add</string>
+    <string name="oPlusToastTrue">Added Succesfully</string>
+    <string name="oPlusToastFalse">Subtracted Succesfully</string>
+
+    <string name="oDetailsAmount">Amount:\u0020</string>
+    <string name="oDetailsBalance">Balance:\u0020</string>
+    <string name="oDetailsNote">Note:\u0020</string>
+
+    <string name="oAlert">Enter Amount</string>
+
+<!--    Expense Activity-->
+    <string name="epTitle">Add New Expense</string>
 </resources>
 
 

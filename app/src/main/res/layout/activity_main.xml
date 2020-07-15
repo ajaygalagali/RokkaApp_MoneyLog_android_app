@@ -21,9 +21,9 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="27dp"
+            android:layout_marginRight="180dp"
             android:layout_weight="2"
-            android:src="@drawable/ic_bannericon"
-            android:layout_marginRight="180dp" />
+            android:src="@drawable/ic_bannericon" />
 
 
         <Spinner
@@ -32,11 +32,11 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_marginEnd="30dp"
-            android:paddingTop="-5dp"
-            android:paddingBottom="-5dp"
             android:layout_weight="0.4"
+            android:background="@drawable/ic_baseline_language_24"
             android:foreground="?android:attr/selectableItemBackground"
-            android:background="@drawable/ic_baseline_language_24"/>
+            android:paddingTop="-5dp"
+            android:paddingBottom="-5dp" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -44,11 +44,11 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_marginEnd="30dp"
-            android:paddingTop="-5dp"
-            android:paddingBottom="-5dp"
             android:layout_weight="0.4"
             android:foreground="?android:attr/selectableItemBackground"
-            android:onClick="NewNameClicked"
+            android:onClick="NewNameClickedd"
+            android:paddingTop="-5dp"
+            android:paddingBottom="-5dp"
 
             app:srcCompat="@drawable/ic_baseline_person_add_24" />
     </LinearLayout>
@@ -141,9 +141,12 @@
 
     <ListView
         android:id="@+id/listViewMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayoutMain"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 

@@ -1,27 +1,20 @@
 package com.astro.rokka;
 
 import android.annotation.SuppressLint;
-import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,7 +49,7 @@ public class AddNewNameActivity extends AppCompatActivity {
 
 
         editTextName = findViewById(R.id.editTextTextPersonName);
-        editTextBalance = findViewById(R.id.editTextNumberSigned);
+        editTextBalance = findViewById(R.id.editTextLabBalance);
 
         textViewAlertAddMember = findViewById(R.id.textViewAlertADdMember);
     }
@@ -136,10 +129,7 @@ public class AddNewNameActivity extends AppCompatActivity {
                     balance = "0";
                 }
 
-
-
                 db.execSQL(String.format("INSERT INTO member_info (mem_name,mem_balance) VALUES('%s',%s)", Name, balance));
-
 
                 @SuppressLint("Recycle") Cursor c = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'", Name), null);
                 int mem_idIndex = c.getColumnIndex("id");

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNewNameActivity">
+    tools:context=".OthersFeature.otherAddNewMemberActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -26,83 +26,76 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:text="@string/addMTitle"
-        android:textColor="#30336b"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="262dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="@string/addMName"
-        android:inputType="textPersonName"
-        android:maxLength="15"
-        android:paddingLeft="15dp"
-        android:paddingTop="10dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <Button
-        android:id="@+id/push_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:background="@drawable/button_bg"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:onClick="addNameClicked"
-        android:padding="15dp"
-        android:text="@string/addMBtn"
-        android:textColor="#FFFFFF"
+        android:layout_marginTop="18dp"
+        android:text="@string/oAddNewTitle"
+        android:textColor="@color/mycolor"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <EditText
-        android:id="@+id/editTextLabBalance"
+    <TextView
+        android:id="@+id/textViewOaddAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:textColor="@color/alert"
+        app:layout_constraintBottom_toTopOf="@+id/editTextOtherMemName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/editTextOtherMemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
-        android:hint="@string/addMBal"
-        android:inputType="numberSigned"
-        android:maxLength="6"
-        android:paddingLeft="15dp"
+        android:hint="@string/addMName"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
         android:paddingTop="10dp"
-        android:paddingRight="15dp"
+        android:paddingEnd="15dp"
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
-        android:id="@+id/textViewAlertADdMember"
+    <EditText
+        android:id="@+id/editTextOtherBal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:textColor="#D51919"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:hint="@string/addMBal"
+        android:inputType="numberSigned"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextOtherMemName" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:background="@drawable/button_bg"
+        android:onClick="oAddNameClicked"
+        android:text="@string/addMBtn"
+        android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editTextOtherBal" />
 </androidx.constraintlayout.widget.ConstraintLayout>

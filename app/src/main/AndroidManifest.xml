@@ -4,8 +4,6 @@
     package="com.astro.rokka">
 
     <application
-
-
         android:allowBackup="true"
         android:icon="@mipmap/my_icon"
         android:label="@string/app_name"
@@ -13,22 +11,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="HardcodedDebugMode">
-
-
-        <activity android:name=".DetailsActivity" />
-
-        <activity
-            android:name=".plusActivity"
-            android:windowSoftInputMode="adjustPan"/>
-
-        <activity android:name=".AddNewNameActivity" />
-        <activity android:name=".MainActivity"
-            >
+        <activity android:name=".Expense.ExpenseMainActivity"></activity>
+        <activity android:name=".OthersFeature.otherDetailsActivity" />
+        <activity android:name=".OthersFeature.oPlusActivity" />
+        <activity android:name=".OthersFeature.otherAddNewMemberActivity" />
+        <activity android:name=".OthersFeature.Others_mainActivity" />
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".DetailsActivity" />
+        <activity
+            android:name=".plusActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".AddNewNameActivity" />
+        <activity android:name=".MainActivity">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
         </activity>
     </application>
 

@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -151,7 +152,10 @@ public class MainActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(MainActivity.this,R.color.mycolor));
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            window.setStatusBarColor(ContextCompat.getColor(MainActivity.this,R.color.mycolor));
+
+        }
 
         listViewMain = findViewById(R.id.listViewMain);
         clMain  = findViewById(R.id.constraintLayoutMain);
@@ -218,11 +222,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void NewNameClicked(View view) {
+    /*public void NewNameClicked(View view) {
+        Intent goToAdd = new Intent(MainActivity.this,AddNewNameActivity.class);
+        startActivity(goToAdd);
+    }*/
+
+    public void NewNameClickedd(View view) {
+        Toast.makeText(this, "Cliked", Toast.LENGTH_SHORT).show();
         Intent goToAdd = new Intent(MainActivity.this,AddNewNameActivity.class);
         startActivity(goToAdd);
     }
-
 
 
     public class HomeListAdapter extends ArrayAdapter<HomeList>{
@@ -298,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             ImageButton imageButtonPlus = view.findViewById(R.id.imageButtonPlus);
-            imageButtonPlus.setTag(String.valueOf(position));
+            imageButtonPlus.setTag(String.valueOf(position)); //not used
 
             imageButtonPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -306,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
 //                Log.i("Plus",String.valueOf(v.getTag()));
                     Intent goToAdd = new Intent(mContext,plusActivity.class);
                     goToAdd.putExtra("name",String.valueOf(textViewName.getText()));
-                    goToAdd.putExtra("currentBalance",String.valueOf(textViewBalance.getText()));
+                    goToAdd.putExtra("currentBalance",String.valueOf(textViewBalance.getText())); //not used
                     Cursor c = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'", textViewName.getText()),null);
 
                     int mem_idIndex = c.getColumnIndex("id");
@@ -361,11 +370,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onBackPressed(){
+    /*public void onBackPressed(){
 
         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
         homeIntent.addCategory( Intent.CATEGORY_HOME );
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(homeIntent);
-    }
+    }*/
 }

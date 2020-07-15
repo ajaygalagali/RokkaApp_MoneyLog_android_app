@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/epTitle"
+        android:gravity="center"
+        android:textColor="@color/mycolor"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/editTextExpAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:background="@drawable/edittext_bg"
+        android:hint="@string/oPlusAmt"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/editTextTextExpNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:hint="@string/plusNote"
+        android:inputType="textMultiLine"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="10dp"
+        android:maxLength="80"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/expAddBtn"
+        android:text="@string/oPlusBtn"
+        android:background="@drawable/button_bg"
+        android:textColor="#fff"
+
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>
