@@ -14,6 +14,13 @@
         android:textColor="@color/mycolor"
         android:textSize="18sp"/>
 
+    <TextView
+        android:id="@+id/textViewExpAlert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/alert"
+        android:gravity="center"/>
+
     <EditText
         android:id="@+id/editTextExpAmount"
         android:layout_width="match_parent"
@@ -22,6 +29,7 @@
         android:inputType="number"
         android:background="@drawable/edittext_bg"
         android:hint="@string/oPlusAmt"
+        android:maxLength="6"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:paddingTop="10dp"

@@ -2,11 +2,13 @@ package com.astro.rokka.OthersFeature;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,6 +26,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.astro.rokka.Expense.ExpenseMainActivity;
+import com.astro.rokka.HomeActivity;
 import com.astro.rokka.HomeList;
 import com.astro.rokka.R;
 
@@ -100,13 +104,13 @@ public class Others_mainActivity extends AppCompatActivity {
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 //            return super.getView(position, convertView, parent);
 
             View view = convertView;
             view = LayoutInflater.from(mContext).inflate(R.layout.others_main_row,parent,false);
 
-            otherMainList currentPosition = otherMemList.get(position);
+            final otherMainList currentPosition = otherMemList.get(position);
             final TextView textViewName = view.findViewById(R.id.textViewOtherName);
             final TextView textViewBalance = view.findViewById(R.id.textViewOtherBalance);
 
@@ -242,6 +246,37 @@ public class Others_mainActivity extends AppCompatActivity {
                 }
             });
 
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+//                    Toast.makeText(mContext, String.valueOf(textViewName.getText()), Toast.LENGTH_SHORT).show();
+
+                    new AlertDialog.Builder(Others_mainActivity.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle(getString(R.string.eAlertTitle))
+                            .setMessage(getString(R.string.alertboxLine))
+                            .setPositiveButton(getString(R.string.alertboxYes), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    db.execSQL(String.format("DELETE FROM oMEmInfo WHERE oMemNAme IS '%s'",currentPosition.getOtherMemName()));
+                                    db.execSQL(String.format("DROP TABLE '%s'",currentPosition.getOtherMemName()));
+                                    Toast.makeText(mContext, getString(R.string.alertboxToast), Toast.LENGTH_SHORT).show();
+                                    arrayList.remove(position);
+                                    other_main_adapter.notifyDataSetChanged();
+//                                    finish();
+//                                    startActivity(getIntent());
+                                }
+
+                            })
+                            .setNegativeButton(getString(R.string.alertboxNo),null).show();
+
+
+
+
+                    return true;
+                }
+            });
+
 
 
             return view;
@@ -251,5 +286,13 @@ public class Others_mainActivity extends AppCompatActivity {
     public void AddOtherMemberClicked(View view) {
         Intent gotoAdd = new Intent(Others_mainActivity.this,otherAddNewMemberActivity.class);
         startActivity(gotoAdd);
+    }
+
+    public void onBackPressed() {
+//        super.onBackPressed();
+
+        Intent gotoHomeMain = new Intent(Others_mainActivity.this, HomeActivity.class);
+        startActivity(gotoHomeMain);
+
     }
 }

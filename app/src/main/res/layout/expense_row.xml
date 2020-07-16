@@ -13,43 +13,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+
             android:padding="10dp">
 
-            <TextView
-                android:id="@+id/textViewOdetailsAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/oDetailsAmount"
-                android:textColor="@color/mycolor"
-                android:textSize="18sp"
-                android:layout_marginBottom="10dp"/>
 
             <TextView
-                android:id="@+id/textViewOdetailsBalance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/oDetailsBalance"
-                android:textColor="@color/mycolor"
-                android:textSize="18sp"
-                android:layout_marginBottom="10dp"/>
-            <TextView
-                android:id="@+id/textViewOdetailsNote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/oDetailsNote"
-                android:textColor="@color/mycolor"
-                android:textSize="18sp"
-                android:layout_marginBottom="10dp"/>
-
-            <TextView
-                android:id="@+id/textViewOdetailsDate"
+                android:id="@+id/textViewExpAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="Amount: "
+                android:textColor="@color/mycolor"
+                android:textSize="18sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/textViewExpNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Note: "
+                android:textColor="@color/mycolor"
+                android:textSize="18sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/textViewExpDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
                 android:gravity="end"/>
         </LinearLayout>
-
-
     </androidx.cardview.widget.CardView>
-
 </LinearLayout>

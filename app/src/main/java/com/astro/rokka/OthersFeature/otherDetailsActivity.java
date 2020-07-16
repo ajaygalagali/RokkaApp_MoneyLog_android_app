@@ -3,10 +3,12 @@ package com.astro.rokka.OthersFeature;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,8 +19,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.astro.rokka.DetailsList;
+import com.astro.rokka.Expense.ExpenseMainActivity;
 import com.astro.rokka.R;
 
 import org.w3c.dom.Text;
@@ -59,11 +63,15 @@ public class otherDetailsActivity extends AppCompatActivity {
         int current_balanceIndex = c.getColumnIndex("current_balance");
         int dateIndex = c.getColumnIndex("date");
         int noteIndex = c.getColumnIndex("note");
-
+        int idIndex = c.getColumnIndex("id");
+        int curTotal = 0;
         while(!c.isAfterLast()){
-            arrayList.add(new otherDetailsList(c.getInt(amountIndex),c.getInt(current_balanceIndex)
+            curTotal+=c.getInt(amountIndex);
+            arrayList.add(new otherDetailsList(c.getInt(amountIndex)
+                    ,curTotal
                     ,c.getString(noteIndex)
-                    ,c.getString(dateIndex)));
+                    ,c.getString(dateIndex)
+                    ,c.getInt(idIndex)));
             c.moveToNext();
         }
 
@@ -91,7 +99,7 @@ public class otherDetailsActivity extends AppCompatActivity {
         @SuppressLint("SetTextI18n")
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 //            return super.getView(position, convertView, parent);
 
             View view = convertView;
@@ -110,9 +118,61 @@ public class otherDetailsActivity extends AppCompatActivity {
             textViewNote.setText(getString(R.string.oDetailsNote)+String.valueOf(currentPosition.getNote()));
             textViewDate.setText(String.valueOf(currentPosition.getDate()));
 
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+//                    Toast.makeText(mContext, String.valueOf(textViewName.getText()), Toast.LENGTH_SHORT).show();
+
+                    new AlertDialog.Builder(otherDetailsActivity.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle(getString(R.string.eAlertTitle))
+                            .setMessage(getString(R.string.alertboxLine))
+                            .setPositiveButton(getString(R.string.alertboxYes), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    Cursor  c = db.rawQuery(String.format("SELECT * FROM oMemInfo WHERE oMemName IS '%s'",title),null);
+                                    c.moveToFirst();
+                                    int balanceIndex = c.getColumnIndex("oMemBalance");
+                                    int bal_db = c.getInt(balanceIndex);
+
+                                    int updatedBal = bal_db - currentPosition.getAmount();
+                                    c.close();
+                                    db.execSQL(String.format("UPDATE oMemInfo SET oMemBalance=%s WHERE oMemName IS '%s'", updatedBal, title));
+                                    db.execSQL(String.format("DELETE FROM '%s' WHERE id IS %s",title,currentPosition.getId()));
+                                    Toast.makeText(mContext, getString(R.string.alertboxToast), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    overridePendingTransition(0, 0);
+                                    startActivity(getIntent());
+                                    overridePendingTransition(0, 0);
+//                                    arrayList.remove(position);
+//                                    Others_mainActivity.other_main_adapter.notifyDataSetChanged();
+//                                    otherDetailsAdapter.notifyDataSetChanged();
+//                                    finish();
+//                                    startActivity(getIntent());
+                                }
+
+                            })
+                            .setNegativeButton(getString(R.string.alertboxNo),null).show();
+
+
+
+
+                    return true;
+                }
+            });
 
 
             return view;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+
+        Intent gotoOtherMain = new Intent(otherDetailsActivity.this, Others_mainActivity.class);
+        startActivity(gotoOtherMain);
+
     }
 }

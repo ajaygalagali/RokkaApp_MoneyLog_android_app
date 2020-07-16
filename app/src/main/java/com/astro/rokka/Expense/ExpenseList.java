@@ -1,15 +1,13 @@
-package com.astro.rokka.OthersFeature;
+package com.astro.rokka.Expense;
 
-public class otherDetailsList {
+public class ExpenseList {
     private int amount;
-    private int balance;
     private String note;
     private String date;
     private int id;
 
-    public otherDetailsList(int amount, int balance, String note, String date,int id) {
+    public ExpenseList(int amount, String note, String date,int id) {
         this.amount = amount;
-        this.balance = balance;
         this.note = note;
         this.date = date;
         this.id = id;
@@ -29,14 +27,6 @@ public class otherDetailsList {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
     }
 
     public String getNote() {

@@ -56,6 +56,7 @@
 
 <!--    Expense Activity-->
     <string name="epTitle">Add New Expense</string>
+    <string name="eAlertTitle">Delete?</string>
 </resources>
 
 

@@ -31,6 +31,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
+            android:maxLength="6"
             android:hint="@string/oPlusAmt"
             android:inputType="number"
             android:paddingStart="15dp"
