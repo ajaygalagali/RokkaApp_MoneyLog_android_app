@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">RoKka</string>
 
-    <string name="mainInstruction">Add New Members</string>
+    <string name="mainInstruction">Add New Member</string>
     <string name="mainInstructionB">Select Language</string>
     <string name="alertboxTitle">: Delete?</string>
     <string name="alertboxLine">" Are you sure you want to delete this?"</string>
@@ -37,6 +37,11 @@
     <string name="plusTextGiven">"Remaining Wage : "</string>
     <string name="detInstruction">" Transactions are shown here"</string>
 
+<!--    Home Activity-->
+    <string name="hAlabours">Labours</string>
+    <string name="hAlentBorrow">Lent/Borrow</string>
+    <string name="hAexpense">Expense</string>
+
     <!--    OthersActivity-->
 
     <string name="oAddNewTitle">Add New Member</string>
@@ -45,8 +50,8 @@
     <string name="oMinusTitle">Debit</string>
     <string name="oPlusAmt">Enter Amount</string>
     <string name="oPlusBtn">Add</string>
-    <string name="oPlusToastTrue">Added Succesfully</string>
-    <string name="oPlusToastFalse">Subtracted Succesfully</string>
+    <string name="oPlusToastTrue">Added Successfully</string>
+    <string name="oPlusToastFalse">Subtracted Successfully</string>
 
     <string name="oDetailsAmount">Amount:\u0020</string>
     <string name="oDetailsBalance">Balance:\u0020</string>

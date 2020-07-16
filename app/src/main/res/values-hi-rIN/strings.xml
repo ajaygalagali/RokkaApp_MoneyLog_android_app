@@ -34,4 +34,20 @@
     <string name="plusBtn">प्रस्तुत</string>
     <string name="plusTitle">" को वेतन"</string>
     <string name="mainInstructionB">भाषा का चयन करें</string>
+    <string name="oAddNewTitle">" नए सदस्य जोड़ें"</string>
+    <string name="eAlertTitle">हटाएं?</string>
+    <string name="epTitle">नया व्यय जोड़ें</string>
+    <string name="oAlert">राशी डालें</string>
+    <string name="oDetailsNote">टिप्पणी:\u0020</string>
+    <string name="oDetailsBalance">शेष :\u0020</string>
+    <string name="oDetailsAmount">रकम:\u0020</string>
+    <string name="oPlusToastFalse">सफलतापूर्वक घटाया गया</string>
+    <string name="oPlusToastTrue">सफलतापूर्वक जोड़ा गया</string>
+    <string name="oPlusBtn">जोड़ें</string>
+    <string name="oPlusAmt">राशी डालें</string>
+    <string name="oPlusTitle">क्रेडिट</string>
+    <string name="oMinusTitle">जमा</string>
+    <string name="hAlabours">मजदूरों</string>
+    <string name="hAlentBorrow">दिया हुआ/लिया</string>
+    <string name="hAexpense">व्यय</string>
 </resources>

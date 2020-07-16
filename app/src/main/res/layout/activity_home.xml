@@ -59,7 +59,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/button_bg"
             android:onClick="laboursClicked"
-            android:text="Labours"
+            android:text="@string/hAlabours"
             android:textColor="#fff" />
 
         <Button
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
             android:onClick="othersClicked"
-            android:text="Others"
+            android:text="@string/hAlentBorrow"
             android:textColor="#fff"
             android:layout_marginBottom="20dp"/>
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
             android:onClick="expenseClicked"
-            android:text="Expense"
+            android:text="@string/hAexpense"
             android:textColor="#fff" />
     </LinearLayout>
 

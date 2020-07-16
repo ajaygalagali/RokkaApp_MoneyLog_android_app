@@ -52,16 +52,16 @@ public class MainActivity extends AppCompatActivity {
 
     //Multi Language Support
 
-    Spinner spinnerLang;
-    String currentLanguage , currentLang;
-    Locale myLocale;
+//    Spinner spinnerLang;
+//    String currentLanguage , currentLang;
+//    Locale myLocale;
 
     ConstraintLayout clMain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
-        db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
+       /* db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
         //Multi Lang Support
         db.execSQL("CREATE TABLE IF NOT EXISTS lang(id INTEGER PRIMARY KEY AUTOINCREMENT,currentlang VARCHAR)");
         Cursor cursor = db.rawQuery("SELECT * FROM lang",null);
@@ -76,15 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
         }
         setLocaleOnCreate(currentLanguage);
-        cursor.close();
+        cursor.close();*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
 
 
 //        currentLanguage = getIntent().getStringExtra(currentLang);
-        spinnerLang = findViewById(R.id.spinnerLanguage);
+        /*spinnerLang = findViewById(R.id.spinnerLanguage);
         List<String> list = new ArrayList<String>();
 
         list.add("Select Language");
@@ -94,8 +94,9 @@ public class MainActivity extends AppCompatActivity {
         list.add("मराठी");
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLang.setAdapter(spinner_adapter);
+        spinnerLang.setAdapter(spinner_adapter);*/
 
+/*
         spinnerLang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -133,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+*/
 
 
 
@@ -193,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setLocale(String localeName) {
+   /* public void setLocale(String localeName) {
         if (!localeName.equals(currentLanguage)) {
             myLocale = new Locale(localeName);
             Resources res = getResources();
@@ -207,9 +209,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(MainActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
-    public void setLocaleOnCreate(String localeName) {
+    /*public void setLocaleOnCreate(String localeName) {
 
             myLocale = new Locale(localeName);
             Resources res = getResources();
@@ -219,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             res.updateConfiguration(conf, dm);
 
 
-    }
+    }*/
 
 
     /*public void NewNameClicked(View view) {
@@ -251,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
 //            return super.getView(position, convertView, parent);
             View view = convertView;
-            db = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
+
 
 
             view = LayoutInflater.from(mContext).inflate(R.layout.main_row,parent,false);

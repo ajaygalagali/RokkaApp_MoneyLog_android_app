@@ -13,10 +13,10 @@
         tools:ignore="HardcodedDebugMode">
         <activity android:name=".Expense.ExpenseMainActivity"></activity>
         <activity android:name=".OthersFeature.otherDetailsActivity" />
-        <activity android:name=".OthersFeature.oPlusActivity" />
+
         <activity android:name=".OthersFeature.otherAddNewMemberActivity" />
         <activity android:name=".OthersFeature.Others_mainActivity" />
-        <activity android:name=".HomeActivity">
+        <activity android:name=".HomeActivity" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

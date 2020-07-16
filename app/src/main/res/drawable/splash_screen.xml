@@ -1,0 +1,19 @@
+
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:opacity="opaque"
+    tools:ignore="MissingDefaultResource">
+    <item android:drawable="@color/white"/>
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/splashlogo"/>
+    </item>
+    <item android:bottom="50dp">
+        <bitmap
+            android:gravity="bottom"
+            android:src="@drawable/splashtagline"/>
+    </item>
+
+</layer-list>

@@ -34,4 +34,20 @@
     <string name="plusAlertD">वेतन अदा करा</string>
     <string name="plusTextGiven">"शिल्लक वेतन : "</string>
     <string name="detInstruction">व्यवहार येथे दर्शविले आहेत</string>
+    <string name="oAddNewTitle">नवीन सदस्य जोडा</string>
+    <string name="oMinusTitle">डेबिट</string>
+    <string name="oPlusTitle">जमा</string>
+    <string name="oPlusAmt">रक्कम प्रविष्ट करा</string>
+    <string name="oPlusBtn">जोडा</string>
+    <string name="oPlusToastTrue">यशस्वीरित्या जोडले</string>
+    <string name="oPlusToastFalse">यशस्वीरित्या वजा केले</string>
+    <string name="oAlert">रक्कम प्रविष्ट करा</string>
+    <string name="epTitle">नवीन खर्च जोडा</string>
+    <string name="eAlertTitle">हटवा?</string>
+    <string name="oDetailsAmount">रक्कम:\u0020</string>
+    <string name="oDetailsBalance">बाकी रक्कम:\u0020</string>
+    <string name="oDetailsNote">टिप्पणी:\u0020</string>
+    <string name="hAlabours">मजूर</string>
+    <string name="hAlentBorrow">दिले/घेतले</string>
+    <string name="hAexpense">खर्च</string>
 </resources>

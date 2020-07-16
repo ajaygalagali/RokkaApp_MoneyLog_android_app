@@ -46,6 +46,22 @@
     <string name="plusTextGiven" tools:ignore="MissingTranslation">ವೇತನ ಉಳುದ್ದಿದ್ದು : </string>
     <string name="plusTitle">ಗೆ ಪಾವತಿಸಲಾಗುತ್ತಿದೆ</string>
     <string name="mainInstructionB">ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="oAddNewTitle">" ಹೊಸ ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ"</string>
+    <string name="oPlusTitle">ಕ್ರೆಡಿಟ್</string>
+    <string name="oMinusTitle">ಡೆಬಿಟ್</string>
+    <string name="oPlusAmt">ಮೊತ್ತವನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="oPlusBtn">ಸೇರಿಸಿ</string>
+    <string name="oPlusToastTrue">ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ</string>
+    <string name="oPlusToastFalse">ಯಶಸ್ವಿಯಾಗಿ ಕಳೆಯಲಾಗುತ್ತದೆ</string>
+    <string name="oDetailsAmount">ಮೊತ್ತ:\u0020</string>
+    <string name="oDetailsBalance">ಬ್ಯಾಲೆನ್ಸ್:\u0020</string>
+    <string name="oDetailsNote">ಟಿಪ್ಪಣಿಗಳು:\u0020</string>
+    <string name="oAlert">ಮೊತ್ತವನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="epTitle">ಹೊಸ ವೆಚ್ಚವನ್ನು ಸೇರಿಸಿ</string>
+    <string name="eAlertTitle">ಅಳಿಸಿ?</string>
+    <string name="hAlabours">ಕಾರ್ಮಿಕರು</string>
+    <string name="hAlentBorrow">"ನೀಡಿದ/ತೆಗೆದುಕೊಂಡಿದ್ದ "</string>
+    <string name="hAexpense">ಖರ್ಚು</string>
 
 
 </resources>
