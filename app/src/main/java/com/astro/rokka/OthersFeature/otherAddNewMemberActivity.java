@@ -127,4 +127,9 @@ public class otherAddNewMemberActivity extends AppCompatActivity {
 
 
     }
+
+    public void arrowBackClicked(View view) {
+
+            finish();
+    }
 }

@@ -26,17 +26,28 @@
             android:src="@drawable/ic_bannericon" />
 
 
+
+
         <Spinner
             android:id="@+id/spinnerLanguage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:layout_marginEnd="30dp"
+
             android:layout_weight="0.4"
             android:background="@drawable/ic_baseline_language_24"
             android:foreground="?android:attr/selectableItemBackground"
             android:paddingTop="-5dp"
             android:paddingBottom="-5dp" />
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_menu"
+            android:onClick="showHomeMenu"
+            android:background="@null"
+            android:foreground="?android:attr/selectableItemBackground"/>
 
     </LinearLayout>
 
@@ -58,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:background="@drawable/button_bg"
+            android:foreground="?android:attr/selectableItemBackground"
             android:onClick="laboursClicked"
             android:text="@string/hAlabours"
             android:textColor="#fff" />
@@ -70,6 +82,7 @@
             android:onClick="othersClicked"
             android:text="@string/hAlentBorrow"
             android:textColor="#fff"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_marginBottom="20dp"/>
 
         <Button
@@ -79,6 +92,7 @@
             android:background="@drawable/button_bg"
             android:onClick="expenseClicked"
             android:text="@string/hAexpense"
+            android:foreground="?android:attr/selectableItemBackground"
             android:textColor="#fff" />
     </LinearLayout>
 

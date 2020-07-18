@@ -20,11 +20,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="27dp"
-            android:src="@drawable/ic_bannericon" />
 
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/ic_arrowback"
+            android:onClick="arrowBackClicked"/>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/tDetails"
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <TextView

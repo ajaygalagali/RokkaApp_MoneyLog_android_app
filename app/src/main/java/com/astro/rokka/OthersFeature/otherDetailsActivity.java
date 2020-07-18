@@ -84,6 +84,11 @@ public class otherDetailsActivity extends AppCompatActivity {
 
     }
 
+    public void arrowBackClicked(View view) {
+        Intent goBack = new Intent(otherDetailsActivity.this,Others_mainActivity.class);
+        startActivity(goBack);
+    }
+
     public class OtherDetailsAdapter extends ArrayAdapter<otherDetailsList>{
 
         private Context mContext;
@@ -170,9 +175,13 @@ public class otherDetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-
         Intent gotoOtherMain = new Intent(otherDetailsActivity.this, Others_mainActivity.class);
+//        overridePendingTransition(0, 0);
+
         startActivity(gotoOtherMain);
+//        overridePendingTransition(0, 0);
+
+
 
     }
 }

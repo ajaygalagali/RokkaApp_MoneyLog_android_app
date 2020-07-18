@@ -15,12 +15,18 @@
     <string name="addMBtn">Add</string>
     <string name="addMAlertA">The name should not contain this (\", \')</string>
     <string name="addMAlertB">Enter different name</string>
+
+
     <string name="detTitle">"Name : "</string>
     <string name="detDays">"Days (Full / Half) : "</string>
     <string name="detGiven">"Paid : "</string>
     <string name="detRem">"Remaining : "</string>
     <string name="detTotal">"Total Wage : "</string>
     <string name="detAlertboxTitle">Delete?</string>
+    <string name="detStatusPositive">PAID</string>
+    <string name="detStatusNegative">PENDING</string>
+    <string name="detUpdate">Updated Succesfully</string>
+
     <string name="plusFulldays">Full Days</string>
     <string name="plushalfdays">Half Days</string>
     <string name="plusFullPerday">Wage/Day</string>
@@ -42,6 +48,10 @@
     <string name="hAlentBorrow">Lent/Borrow</string>
     <string name="hAexpense">Expense</string>
 
+<!--    titles-->
+    <string name="tDetails">Details</string>
+    <string name="tAddNewRecord">Add new record</string>
+
     <!--    OthersActivity-->
 
     <string name="oAddNewTitle">Add New Member</string>
@@ -62,6 +72,13 @@
 <!--    Expense Activity-->
     <string name="epTitle">Add New Expense</string>
     <string name="eAlertTitle">Delete?</string>
+
+<!--    Menu-->
+    <string name="menuhelp">Help</string>
+    <string name="menuaboutus">About Us</string>
+
+
+
 </resources>
 
 

@@ -86,6 +86,12 @@ public class Others_mainActivity extends AppCompatActivity {
 
     }
 
+    public void arrowBackClicked(View view) {
+        Intent gotoHomeMain = new Intent(Others_mainActivity.this, HomeActivity.class);
+        startActivity(gotoHomeMain);
+
+    }
+
 
     public class OtherMainAdapter extends ArrayAdapter<otherMainList>{
 
@@ -293,6 +299,7 @@ public class Others_mainActivity extends AppCompatActivity {
 
         Intent gotoHomeMain = new Intent(Others_mainActivity.this, HomeActivity.class);
         startActivity(gotoHomeMain);
+
 
     }
 }

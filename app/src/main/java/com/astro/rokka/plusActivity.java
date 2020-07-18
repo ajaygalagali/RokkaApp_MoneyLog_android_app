@@ -177,7 +177,7 @@ public class plusActivity extends AppCompatActivity {
             db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s", updatedBalance, posiOne));
 
 
-            db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages,halfdays) VALUES('%s',%s,%s,%s,'%s',%s,%s)", posiOne, stringTime, aal, Integer.valueOf(given), remPagar, note, totalPagar, halfdays));
+            db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages,halfdays) VALUES('%s',%s,%s,%s,'%s',%s,%s)",name , stringTime, aal, Integer.valueOf(given), remPagar, note, totalPagar, halfdays));
 
             Intent goToMain = new Intent(plusActivity.this, MainActivity.class);
 
@@ -221,5 +221,9 @@ public class plusActivity extends AppCompatActivity {
                 textViewRem.setText(getString(R.string.plusTextGiven) + String.valueOf(remPagar));
             }
 
+    }
+
+    public void arrowBackClicked(View view) {
+        finish();
     }
 }

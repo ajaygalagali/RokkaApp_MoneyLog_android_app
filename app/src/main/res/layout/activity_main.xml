@@ -18,13 +18,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="27dp"
-            android:layout_marginRight="180dp"
-            android:layout_weight="2"
-            android:src="@drawable/ic_bannericon" />
 
+        <ImageButton
+            android:id="@+id/imageButton7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:background="@null"
+            app:srcCompat="@drawable/ic_arrowback"
+            android:onClick="arrowBackClicked"/>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/hAlabours"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
 
         <ImageView
             android:id="@+id/imageView4"
@@ -32,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_marginEnd="30dp"
-            android:layout_weight="0.4"
+            android:layout_weight="0.5"
             android:foreground="?android:attr/selectableItemBackground"
             android:onClick="NewNameClickedd"
             android:paddingTop="-5dp"

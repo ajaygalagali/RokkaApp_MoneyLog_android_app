@@ -11,7 +11,9 @@ public class DetailsList {
     private String note;
     private int halfdays;
 
-    public DetailsList(int days, int total_wages, int rem_wages, int paid_wages, String note, String time, int halfdays){
+    private int id;
+
+    public DetailsList(int days, int total_wages, int rem_wages, int paid_wages, String note, String time, int halfdays,int id){
 
         this.time = time;
         this.days = days;
@@ -20,6 +22,15 @@ public class DetailsList {
         this.rem_wages = rem_wages;
         this.note = note;
         this.halfdays=halfdays;
+        this.id=id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNote() {

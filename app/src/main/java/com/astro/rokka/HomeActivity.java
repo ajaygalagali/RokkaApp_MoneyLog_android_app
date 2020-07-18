@@ -9,9 +9,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -54,6 +58,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+        // Menu
+
+
+
+        //Spinner
         spinnerLang = findViewById(R.id.spinnerLanguage);
         List<String> list = new ArrayList<String>();
 
@@ -157,8 +167,29 @@ public class HomeActivity extends AppCompatActivity {
         Intent expIntent = new Intent(HomeActivity.this, ExpenseMainActivity.class);
         startActivity(expIntent);
     }
+
+    public void showHomeMenu(View view) {
+        PopupMenu popup = new PopupMenu(this,view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.home_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menuAboutus:
+                        Toast.makeText(HomeActivity.this, "About Us", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.menuHelp:
+                        Toast.makeText(HomeActivity.this, "Help", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    default: return false;
+                }
+            }
+        });
+        popup.show();
+    }
 }
 
-//Todo: Intro Screens
-//Todo: Spash Screen
-//Todo: About Page
+

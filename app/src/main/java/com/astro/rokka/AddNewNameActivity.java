@@ -131,17 +131,17 @@ public class AddNewNameActivity extends AppCompatActivity {
 
                 db.execSQL(String.format("INSERT INTO member_info (mem_name,mem_balance) VALUES('%s',%s)", Name, balance));
 
-                @SuppressLint("Recycle") Cursor c = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'", Name), null);
+                /*@SuppressLint("Recycle") Cursor c = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'", Name), null);
                 int mem_idIndex = c.getColumnIndex("id");
-                c.moveToFirst();
-                boolean flag = true;
+                c.moveToFirst();*/
+                /*boolean flag = true;
                 while (flag) {
                     mem_id_from_db = c.getInt(mem_idIndex);
                     flag = false;
-                }
+                }*/
 
                 //CREATING TABLE 2
-                db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,days INT,total_wages INT,paid_wages INT,rem_wages INT,date VARCHAR,note VARCHAR,halfdays INT)", mem_id_from_db));
+                db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,days INT,total_wages INT,paid_wages INT,rem_wages INT,date VARCHAR,note VARCHAR,halfdays INT)", Name));
 
 
                 MainActivity.homeListAdapter.notifyDataSetChanged();

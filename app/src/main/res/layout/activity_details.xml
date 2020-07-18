@@ -18,12 +18,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="27dp"
+        <ImageButton
+            android:id="@+id/imageButton9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_arrowback"
+            android:background="@null"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="arrowBackClicked"/>
 
-            android:src="@drawable/ic_bannericon" />
-
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="@string/tDetails" />
     </LinearLayout>
 
     <View

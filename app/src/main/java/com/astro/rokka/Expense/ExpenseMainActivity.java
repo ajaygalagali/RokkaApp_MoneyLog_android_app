@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.astro.rokka.HomeActivity;
 import com.astro.rokka.HomeList;
 import com.astro.rokka.MainActivity;
 import com.astro.rokka.R;
@@ -112,6 +114,12 @@ public class ExpenseMainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void arrowBackClicked(View view) {
+        finish();
+        /*Intent goBack = new Intent(ExpenseMainActivity.this, HomeActivity.class);
+        startActivity(goBack);*/
     }
 
     public class ExpenseAdpater extends ArrayAdapter<ExpenseList>{
