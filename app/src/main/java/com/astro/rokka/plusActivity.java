@@ -167,6 +167,7 @@ public class plusActivity extends AppCompatActivity {
 
             remPagar = totalPagar - Integer.valueOf(given);
             note = editTextNote.getText().toString();
+            note = note.replace("'", "''");
             updatedBalance = Integer.parseInt(currentBalance) + remPagar;
 
             String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());

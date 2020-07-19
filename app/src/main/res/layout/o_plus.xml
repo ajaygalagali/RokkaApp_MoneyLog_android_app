@@ -23,7 +23,6 @@
             android:text="@string/oPlusTitle" />
 
 
-
         <EditText
             android:id="@+id/editTextOtherPlus"
             android:layout_width="wrap_content"
@@ -31,9 +30,9 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
-            android:maxLength="6"
             android:hint="@string/oPlusAmt"
-            android:inputType="number"
+            android:inputType="numberSigned|number"
+            android:maxLength="6"
             android:paddingStart="15dp"
             android:paddingTop="10dp"
             android:paddingEnd="15dp"

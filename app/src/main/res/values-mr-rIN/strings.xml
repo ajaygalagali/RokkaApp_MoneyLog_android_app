@@ -50,4 +50,15 @@
     <string name="hAlabours">मजूर</string>
     <string name="hAlentBorrow">दिले/घेतले</string>
     <string name="hAexpense">खर्च</string>
+    <string name="fAll">सर्व</string>
+    <string name="menuaboutus">आमच्याबद्दल</string>
+    <string name="menuhelp">मदत</string>
+    <string name="fToday">आज</string>
+    <string name="fThisMonth">या महिन्यात</string>
+    <string name="fThisYear">या वर्षी</string>
+    <string name="tDetails">"तपशील "</string>
+    <string name="tAddNewRecord">नवीन रेकॉर्ड जोडा</string>
+    <string name="detStatusNegative">प्रलंबित</string>
+    <string name="detStatusPositive">पैसे दिले</string>
+    <string name="detUpdate">यशस्वीरित्या अद्यतनित केले</string>
 </resources>

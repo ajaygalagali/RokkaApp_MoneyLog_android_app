@@ -167,6 +167,8 @@ public class Others_mainActivity extends AppCompatActivity {
                                 db.execSQL(String.format("UPDATE oMemInfo SET oMemBalance=%s WHERE oMemName IS '%s'", updatedBal, String.valueOf(textViewName.getText())));
 
                                 Log.i("Updated Balance Inserted", String.valueOf(updatedBal));
+                                String note = String.valueOf(editTextPlusNote.getText());
+                                note = note.replace("'", "''");
 
                                 //amount INT,current_balance INT,date VARCHAR,note VARCHAR
                                 db.execSQL(String.format("INSERT INTO '%s'(amount,current_balance,date,note) VALUES(%s,%s,'%s','%s')"
@@ -174,7 +176,7 @@ public class Others_mainActivity extends AppCompatActivity {
                                         , Integer.parseInt(String.valueOf(editTextPlus.getText()))
                                         , updatedBal
                                         , stringTime
-                                        , String.valueOf(editTextPlusNote.getText())));
+                                        , note));
 //                            Log.i("Insertion","TRUE");
 //                            other_main_adapter.notifyDataSetChanged();
                                 textViewBalance.setText(String.valueOf(updatedBal));

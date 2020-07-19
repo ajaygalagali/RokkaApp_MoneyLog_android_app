@@ -152,4 +152,8 @@ public class AddNewNameActivity extends AppCompatActivity {
 
         }
     }
+
+    public void arrowBackClicked(View view) {
+        finish();
+    }
 }

@@ -62,6 +62,17 @@
     <string name="hAlabours">ಕಾರ್ಮಿಕರು</string>
     <string name="hAlentBorrow">"ನೀಡಿದ/ತೆಗೆದುಕೊಂಡಿದ್ದ "</string>
     <string name="hAexpense">ಖರ್ಚು</string>
+    <string name="menuaboutus">ನಮ್ಮ ಬಗ್ಗೆ</string>
+    <string name="menuhelp">ಸಹಾಯ</string>
+    <string name="fToday">ಇವತ್ತು</string>
+    <string name="fThisMonth">ಈ ತಿಂಗಳು</string>
+    <string name="fThisYear">ಈ ವರ್ಷ</string>
+    <string name="fAll">ಎಲ್ಲವೂ</string>
+    <string name="tAddNewRecord">ಹೊಸ ದಾಖಲೆಯನ್ನು ಸೇರಿಸಿ</string>
+    <string name="tDetails">ವಿವರಗಳು</string>
+    <string name="detStatusNegative">ಬಾಕಿ ಉಳಿದಿದೆ</string>
+    <string name="detStatusPositive">ಪಾವತಿಸಲಾಗಿದೆ</string>
+    <string name="detUpdate">ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ</string>
 
 
 </resources>

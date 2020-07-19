@@ -11,24 +11,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".Expense.ExpenseMainActivity"></activity>
-        <activity android:name=".OthersFeature.otherDetailsActivity" />
+        <activity android:name=".Expense.ExpenseMainActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".OthersFeature.otherDetailsActivity" android:screenOrientation="portrait"/>
 
-        <activity android:name=".OthersFeature.otherAddNewMemberActivity" />
-        <activity android:name=".OthersFeature.Others_mainActivity" />
-        <activity android:name=".HomeActivity" android:theme="@style/SplashTheme">
+        <activity android:name=".OthersFeature.otherAddNewMemberActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".OthersFeature.Others_mainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".HomeActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity" />
+        <activity android:name=".DetailsActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".plusActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".AddNewNameActivity" />
-        <activity android:name=".MainActivity">
+            android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"/>
+        <activity android:name=".AddNewNameActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait">
 
             <!--
             <intent-filter>

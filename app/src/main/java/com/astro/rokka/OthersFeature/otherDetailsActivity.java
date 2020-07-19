@@ -40,7 +40,7 @@ public class otherDetailsActivity extends AppCompatActivity {
     SQLiteDatabase db;
 
 
-
+//Todo: Initial balance bug
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

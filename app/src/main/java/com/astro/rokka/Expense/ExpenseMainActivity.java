@@ -13,14 +13,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.util.Calendar;
+import android.icu.util.TimeZone;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,36 +47,115 @@ public class ExpenseMainActivity extends AppCompatActivity {
     ArrayList<ExpenseList> arrayList;
     ExpenseAdpater expenseAdpater;
 
+    ArrayList<String> spinnerList;
+
+    Spinner spinnerFilter;
+    TextView textViewTotal;
+    Calendar calendar;
+    int date;
+    int month;
+    int year;
+    int plusMonth;
+
+    int total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_main);
 
-        listView = findViewById(R.id.listViewExpenseMain);
-        arrayList = new ArrayList<>();
-        arrayList.clear();
-        db = openOrCreateDatabase("expense_db",MODE_PRIVATE,null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS expenseTable(id INTEGER PRIMARY KEY AUTOINCREMENT,amount INTEGER,note VARCHAR,date VARCHAR)");
+        //Calender
+        calendar = Calendar.getInstance(TimeZone.getDefault());
 
-        Cursor c = db.rawQuery("SELECT * FROM expenseTable",null);
+        //db
+        db = openOrCreateDatabase("expense_db",MODE_PRIVATE,null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS expenseTable(id INTEGER PRIMARY KEY AUTOINCREMENT,amount INTEGER,note VARCHAR,dateDD INTEGER,dateMM INTEGER,dateYYYY INTEGER,date VARCHAR)");
+
+        // Spinner Filter
+        spinnerFilter = findViewById(R.id.spinnerExpFilter);
+        textViewTotal = findViewById(R.id.textViewExpTotal);
+        spinnerList = new ArrayList<String>();
+        spinnerList.add(getString(R.string.fToday));
+        spinnerList.add(getString(R.string.fThisMonth));
+        spinnerList.add(getString(R.string.fThisYear));
+        spinnerList.add(getString(R.string.fAll));
+        ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerList);
+        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFilter.setAdapter(spinner_adapter);
+
+
+        spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("Spinner",String.valueOf(position));
+
+                // DD-MM-YYYY
+
+                date = calendar.get(Calendar.DATE);
+                month = calendar.get(Calendar.MONTH);
+                year = calendar.get(Calendar.YEAR);
+                plusMonth = month+1;
+
+                if(position == 0){
+                    String query = String.format(String.format("SELECT * FROM expenseTable WHERE dateDD IS %s AND dateMM is %s",date,plusMonth));
+                    updateAdapter(query);
+                }
+
+                if(position == 1){
+
+                    String query = String.format("SELECT * FROM expenseTable WHERE dateMM IS %s",plusMonth);
+                    updateAdapter(query);
+                }
+
+                if(position == 2){
+                    String query = String.format("SELECT * FROM expenseTable WHERE dateYYYY IS %s",year);
+                    updateAdapter(query);
+                }
+                if(position == 3){
+                    String query = String.format("SELECT * FROM expenseTable");
+                    updateAdapter(query);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        listView = findViewById(R.id.listViewExpenseMain);
+        listView.setDivider(null);
+        arrayList = new ArrayList<>();
+
+
+        expenseAdpater = new ExpenseAdpater(this,arrayList);
+        listView.setAdapter(expenseAdpater);
+
+
+    }
+
+    public void updateAdapter(String query){
+        arrayList.clear();
+
+
+        Cursor c = db.rawQuery(query,null);
         c.moveToFirst();
 
         int amountIndex = c.getColumnIndex("amount");
         int noteIndex = c.getColumnIndex("note");
         int dateIndex = c.getColumnIndex("date");
         int idIndex = c.getColumnIndex("id");
-
+        total = 0;
         while(!c.isAfterLast()){
+            total = total + c.getInt(amountIndex);
+
             arrayList.add(new ExpenseList(c.getInt(amountIndex),c.getString(noteIndex),c.getString(dateIndex),c.getInt(idIndex)));
             c.moveToNext();
         }
+        textViewTotal.setText("₹ "+String.valueOf(total));
         c.close();
-
-        expenseAdpater = new ExpenseAdpater(this,arrayList);
-        listView.setAdapter(expenseAdpater);
-
-
     }
 
     public void newExpenseClicked(View view) {
@@ -96,9 +180,20 @@ public class ExpenseMainActivity extends AppCompatActivity {
                     String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                     String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
                     String stringTime = currentDate + " " + currentTime;
-                    db.execSQL(String.format("INSERT INTO expenseTable(amount,note,date) VALUES(%s,'%s','%s')",editTextExpAmount.getText()
-                    ,String.valueOf(editTextExpNote.getText())
-                    ,stringTime));
+
+                    date = calendar.get(Calendar.DATE);
+                    month = calendar.get(Calendar.MONTH);
+                    int plusmonth = month+1;
+                    year = calendar.get(Calendar.YEAR);
+                    String note = String.valueOf(editTextExpNote.getText());
+                    note = note.replace("'", "''");
+
+                    db.execSQL(String.format("INSERT INTO expenseTable(amount,note,date,dateDD,dateMM,dateYYYY) VALUES(%s,'%s','%s',%s,%s,%s)",editTextExpAmount.getText()
+                    ,note
+                    ,stringTime
+                    ,date
+                    ,plusmonth
+                    ,year));
 
                     Cursor c = db.rawQuery("SELECT id FROM expenseTable",null);
                     c.moveToLast();
@@ -106,6 +201,9 @@ public class ExpenseMainActivity extends AppCompatActivity {
                     c.close();
                     // Toast.makeText(ExpenseMainActivity.this, String.valueOf(lastid), Toast.LENGTH_SHORT).show();
                     arrayList.add(new ExpenseList(Integer.parseInt(String.valueOf(editTextExpAmount.getText())),String.valueOf(editTextExpNote.getText()),stringTime,lastid));
+                    // String t ="₹ "+String.valueOf(total+Integer.parseInt(String.valueOf(editTextExpAmount.getText()))) ;
+                    total = total+Integer.parseInt(editTextExpAmount.getText().toString());
+                    textViewTotal.setText(String.valueOf(total));
 
                     Toast.makeText(ExpenseMainActivity.this, getString(R.string.oPlusToastTrue), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -164,6 +262,8 @@ public class ExpenseMainActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     db.execSQL(String.format("DELETE FROM expenseTable WHERE id IS %s",currentPosition.getId()));
                                     Toast.makeText(mContext, getString(R.string.alertboxToast), Toast.LENGTH_SHORT).show();
+                                    total = total-currentPosition.getAmount();
+                                    textViewTotal.setText("₹ "+String.valueOf(total));
                                     arrayList.remove(position);
                                     expenseAdpater.notifyDataSetChanged();
 //                                    finish();

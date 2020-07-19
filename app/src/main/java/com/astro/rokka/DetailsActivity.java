@@ -202,6 +202,8 @@ public class DetailsActivity extends AppCompatActivity {
 //                            Log.i("Amount", String.valueOf(editTextAmount.getText()));
                             String pAmount = editTextAmount.getText().toString();
                             String pNote = editTextNote.getText().toString();
+                            pNote = pNote.replace("'", "''");
+
 //                            Log.i("pAmount", pAmount);
 
                             if(pAmount.isEmpty()){
@@ -213,7 +215,7 @@ public class DetailsActivity extends AppCompatActivity {
                                 textViewAlert.animate().scaleX(1).setDuration(500);
                                 textViewAlert.animate().scaleY(1).setDuration(500);
                             }else{
-                                // Todo: Update to db
+
 
                                 // fetch current balance
                                 Cursor cc = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'",Name),null);
@@ -234,7 +236,19 @@ public class DetailsActivity extends AppCompatActivity {
 
                                 //  '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,days INT,total_wages INT,paid_wages INT,rem_wages INT,date VARCHAR,note VARCHAR,halfdays INT)", Name));
                                 //  dbb.execSQL(String.format("UPDATE member_info SET mem_balance = %s WHERE mem_name IS '%s'",toBeUpdated,Name));
-                                db.execSQL(String.format("UPDATE '%s' SET paid_wages = %s,rem_wages = %s WHERE id = %s",Name,updated_given,updated_remaining,currentPosition.getId()));
+                                DetailsList newList;
+                                if(!pNote.isEmpty()){
+                                    Toast.makeText(DetailsActivity.this, pNote, Toast.LENGTH_SHORT).show();
+                                    db.execSQL(String.format("UPDATE '%s' SET paid_wages = %s,rem_wages = %s,note='%s' WHERE id = %s",Name,updated_given,updated_remaining,pNote,currentPosition.getId()));
+                                     newList = new DetailsList(currentPosition.getDays(),currentPosition.getTotal_wages(),updated_remaining,updated_given,
+                                            pNote,currentPosition.getTime(),currentPosition.getHalfdays(),currentPosition.getId());
+                                }else{
+                                    db.execSQL(String.format("UPDATE '%s' SET paid_wages = %s,rem_wages = %s WHERE id = %s",Name,updated_given,updated_remaining,currentPosition.getId()));
+                                     newList = new DetailsList(currentPosition.getDays(),currentPosition.getTotal_wages(),updated_remaining,updated_given,
+                                            currentPosition.getNote(),currentPosition.getTime(),currentPosition.getHalfdays(),currentPosition.getId());
+                                }
+
+//                                db.execSQL(String.format("UPDATE '%s' SET paid_wages = %s,rem_wages = %s WHERE id = %s",Name,updated_given,updated_remaining,currentPosition.getId()));
                                 db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE mem_name IS '%s'", updated_bal, Name));
                                 Toast.makeText(DetailsActivity.this, getString(R.string.detUpdate), Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
@@ -243,8 +257,7 @@ public class DetailsActivity extends AppCompatActivity {
                                 //  DetailsList(int days, int total_wages, int rem_wages, int paid_wages, String note, String time, int halfdays,int id)
                                 /*detList.add(position+1,new DetailsList(currentPosition.getDays(),currentPosition.getTotal_wages(),updated_remaining,updated_given
                                         ,currentPosition.getNote(),currentPosition.getNote(),currentPosition.getTime(),currentPosition.getHalfdays(),currentPosition.getId()));*/
-                                DetailsList newList = new DetailsList(currentPosition.getDays(),currentPosition.getTotal_wages(),updated_remaining,updated_given,
-                                        currentPosition.getNote(),currentPosition.getTime(),currentPosition.getHalfdays(),currentPosition.getId());
+
                                 detList.set(position,newList);
 
 

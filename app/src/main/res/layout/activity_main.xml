@@ -111,30 +111,6 @@
                     android:textSize="24sp" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center">
-
-
-                <ImageView
-                    android:id="@+id/imageView44"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    app:srcCompat="@drawable/ic_baseline_language_48" />
-
-                <TextView
-                    android:id="@+id/textView33"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/mainInstructionB"
-                    android:textColor="#A4A4A4"
-
-                    android:textSize="24sp" />
-            </TableRow>
-
         </TableLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

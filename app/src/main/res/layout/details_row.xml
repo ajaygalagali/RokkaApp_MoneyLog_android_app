@@ -1,137 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        android:clickable="true"
+
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:srcCompat="@drawable/ic_baseline_post_add_24" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
-        <TableRow
+        <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
-            <TextView
-                android:id="@+id/textViewDtDays"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="days"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/textViewDetStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="@string/detStatusNegative"
-                android:textColor="@color/alert" />
-
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <TextView
-                android:id="@+id/textViewDtTotalWage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingEnd="80dp"
-                android:text="total wage"
-                android:textColor="#000000"
-                tools:ignore="RtlSymmetry" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <TextView
-                android:id="@+id/textViewDtGiven"
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingEnd="125dp"
-                android:text="paid"
-                android:textColor="#000000"
-                tools:ignore="RtlSymmetry" />
-        </TableRow>
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp">
+                <TextView
+                    android:id="@+id/textViewDtDays"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="days"
+                    android:textColor="#000000" />
 
-            <TextView
-                android:id="@+id/textViewDtRem"
+                <TextView
+                    android:id="@+id/textViewDetStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/detStatusNegative"
+                    android:textColor="@color/alert" />
+
+
+            </TableRow>
+
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingEnd="125dp"
-                android:text="remaining"
-                android:textColor="#000000"
-                tools:ignore="RtlSymmetry" />
-        </TableRow>
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp">
+                <TextView
+                    android:id="@+id/textViewDtTotalWage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="80dp"
+                    android:text="total wage"
+                    android:textColor="#000000"
+                    tools:ignore="RtlSymmetry" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/textViewDtNote"
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Notes..." />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-            <!--            android:ellipsize="end"-->
-            <!--            android:maxLines="1" -->
-        </TableRow>
+                <TextView
+                    android:id="@+id/textViewDtGiven"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingEnd="125dp"
+                    android:text="paid"
+                    android:textColor="#000000"
+                    tools:ignore="RtlSymmetry" />
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp">
-
-            <TextView
-                android:id="@+id/textViewDtDate"
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="date"
-                android:textAlignment="textStart" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp">
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/textViewDtRem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingEnd="125dp"
+                    android:text="remaining"
+                    android:textColor="#000000"
+                    tools:ignore="RtlSymmetry" />
+            </TableRow>
 
-    </LinearLayout>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:id="@+id/textViewDtNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Notes..." />
+
+                <!--            android:ellipsize="end"-->
+                <!--            android:maxLines="1" -->
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:id="@+id/textViewDtDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="date"
+                    android:textAlignment="textStart" />
+
+            </TableRow>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
