@@ -100,7 +100,15 @@ public class ExpenseMainActivity extends AppCompatActivity {
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerFilter.setAdapter(spinner_adapter);
 
+        listView = findViewById(R.id.listViewExpenseMain);
+        listView.setDivider(null);
+        arrayList = new ArrayList<>();
 
+
+        expenseAdpater = new ExpenseAdpater(this,arrayList);
+        listView.setAdapter(expenseAdpater);
+
+        spinnerFilter.setSelection(0);
         spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -142,13 +150,7 @@ public class ExpenseMainActivity extends AppCompatActivity {
 
 
 
-        listView = findViewById(R.id.listViewExpenseMain);
-        listView.setDivider(null);
-        arrayList = new ArrayList<>();
 
-
-        expenseAdpater = new ExpenseAdpater(this,arrayList);
-        listView.setAdapter(expenseAdpater);
 
 
     }
