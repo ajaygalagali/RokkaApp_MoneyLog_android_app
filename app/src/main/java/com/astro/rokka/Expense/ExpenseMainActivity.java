@@ -229,6 +229,10 @@ public class ExpenseMainActivity extends AppCompatActivity {
 
                     Toast.makeText(ExpenseMainActivity.this, getString(R.string.oPlusToastTrue), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    if(!arrayList.isEmpty()){
+                        linearLayout.setVisibility(View.INVISIBLE);
+                    }
+
                     expenseAdpater.notifyDataSetChanged();
                 }
             }
@@ -288,6 +292,9 @@ public class ExpenseMainActivity extends AppCompatActivity {
                                     textViewTotal.setText("₹ "+String.valueOf(total));
                                     arrayList.remove(position);
                                     expenseAdpater.notifyDataSetChanged();
+                                    if(arrayList.isEmpty()){
+                                        linearLayout.setVisibility(View.VISIBLE);
+                                    }
 //                                    finish();
 //                                    startActivity(getIntent());
                                 }

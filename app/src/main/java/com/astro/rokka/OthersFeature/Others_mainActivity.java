@@ -186,10 +186,12 @@ public class Others_mainActivity extends AppCompatActivity {
 
                                 String note = String.valueOf(editTextPlusNote.getText());
                                 note = note.replace("'", "''");
+                                String name = String.valueOf(textViewName.getText());
+                                name = name.replace(" ", "_");
 
                                 //amount INT,current_balance INT,date VARCHAR,note VARCHAR
                                 db.execSQL(String.format("INSERT INTO '%s'(amount,date,note) VALUES(%s,'%s','%s')"
-                                        , String.valueOf(textViewName.getText())
+                                        ,name
                                         , Integer.parseInt(String.valueOf(editTextPlus.getText()))
                                         , stringTime
                                         , note));
@@ -245,10 +247,11 @@ public class Others_mainActivity extends AppCompatActivity {
                                 db.execSQL(String.format("UPDATE oMemInfo SET oMemBalance=%s WHERE oMemName IS '%s'", updatedBal, String.valueOf(textViewName.getText())));
 
 //                            Log.i("Updated Balance Inserted",String.valueOf(updatedBal));
-
+                                String name = String.valueOf(textViewName.getText());
+                                name = name.replace(" ", "_");
                                 //amount INT,current_balance INT,date VARCHAR,note VARCHAR
                                 db.execSQL(String.format("INSERT INTO '%s'(amount,date,note) VALUES(%s,'%s','%s')"
-                                        , String.valueOf(textViewName.getText())
+                                        , name
                                         , (Integer.parseInt(String.valueOf(editTextPlus.getText())) * -1)
                                         , stringTime
                                         , String.valueOf(editTextPlusNote.getText())));
@@ -288,7 +291,7 @@ public class Others_mainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     db.execSQL(String.format("DELETE FROM oMEmInfo WHERE oMemNAme IS '%s'",currentPosition.getOtherMemName()));
-                                    db.execSQL(String.format("DROP TABLE '%s'",currentPosition.getOtherMemName()));
+                                    db.execSQL(String.format("DROP TABLE '%s'",currentPosition.getOtherMemName().replace(" ","_")));
                                     Toast.makeText(mContext, getString(R.string.alertboxToast), Toast.LENGTH_SHORT).show();
                                     arrayList.remove(position);
                                     other_main_adapter.notifyDataSetChanged();

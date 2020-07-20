@@ -125,6 +125,8 @@ public class otherAddNewMemberActivity extends AppCompatActivity {
 
                 //CREATING TABLE 2
                 String tabName = String.valueOf(editTextName.getText());
+                tabName = tabName.replace(" ", "_");
+
 //                db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,amount INT,current_balance INT,date VARCHAR,note VARCHAR)", mem_id_from_db));
                 db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,amount INT,date VARCHAR,note VARCHAR)", tabName));
 

@@ -177,8 +177,9 @@ public class plusActivity extends AppCompatActivity {
             db = openOrCreateDatabase("rokk_db", MODE_PRIVATE, null);
             db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s", updatedBalance, posiOne));
 
+             name = name.replace(" ", "_");
 
-            db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages,halfdays) VALUES('%s',%s,%s,%s,'%s',%s,%s)",name , stringTime, aal, Integer.valueOf(given), remPagar, note, totalPagar, halfdays));
+             db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages,halfdays) VALUES('%s',%s,%s,%s,'%s',%s,%s)",name , stringTime, aal, Integer.valueOf(given), remPagar, note, totalPagar, halfdays));
 
             Intent goToMain = new Intent(plusActivity.this, MainActivity.class);
 

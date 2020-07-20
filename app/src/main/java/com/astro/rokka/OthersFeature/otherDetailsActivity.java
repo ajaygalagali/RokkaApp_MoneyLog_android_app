@@ -39,7 +39,7 @@ public class otherDetailsActivity extends AppCompatActivity {
 
     ListView listViewOtherDetails;
     TextView textViewTitle;
-    String title;
+    String title,underscore_title;
     ArrayList<otherDetailsList> arrayList;
     OtherDetailsAdapter otherDetailsAdapter;
     SQLiteDatabase db;
@@ -64,12 +64,14 @@ public class otherDetailsActivity extends AppCompatActivity {
         Intent i = getIntent();
         title = i.getStringExtra("name");
         textViewTitle.setText(title);
+        underscore_title = title.replace(" ", "_");
+
 
         arrayList = new ArrayList<>();
 
         //Fetching from Db
         db = openOrCreateDatabase("others_db",MODE_PRIVATE,null);
-        Cursor c = db.rawQuery(String.format("SELECT * FROM '%s'",title),null);
+        Cursor c = db.rawQuery(String.format("SELECT * FROM '%s'",underscore_title),null);
 
         c.moveToFirst();
         int amountIndex = c.getColumnIndex("amount");
@@ -157,7 +159,7 @@ public class otherDetailsActivity extends AppCompatActivity {
                                     int updatedBal = bal_db - currentPosition.getAmount();
                                     c.close();
                                     db.execSQL(String.format("UPDATE oMemInfo SET oMemBalance=%s WHERE oMemName IS '%s'", updatedBal, title));
-                                    db.execSQL(String.format("DELETE FROM '%s' WHERE id IS %s",title,currentPosition.getId()));
+                                    db.execSQL(String.format("DELETE FROM '%s' WHERE id IS %s",underscore_title,currentPosition.getId()));
                                     Toast.makeText(mContext, getString(R.string.alertboxToast), Toast.LENGTH_SHORT).show();
                                     finish();
                                     overridePendingTransition(0, 0);

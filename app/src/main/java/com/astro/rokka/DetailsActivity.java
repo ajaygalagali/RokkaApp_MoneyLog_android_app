@@ -38,7 +38,7 @@ import java.util.List;
 public class DetailsActivity extends AppCompatActivity {
 
 
-    String Name, mem_id;
+    String Name, mem_id,underscore_Name;
 
     TextView textViewHeading;
     ListView listViewDet;
@@ -93,12 +93,14 @@ public class DetailsActivity extends AppCompatActivity {
         Name = i.getStringExtra("name");
 
         textViewHeading.setText(getString(R.string.detTitle)+Name);
+        underscore_Name = Name.replace(" ", "_");
+
 
         detList = new ArrayList<>();
         detailsAdapter = new DetailsAdapter(this, detList);
 
 
-        @SuppressLint("Recycle") Cursor c = db.rawQuery(String.format("SELECT * FROM '%s'",Name),null);
+        @SuppressLint("Recycle") Cursor c = db.rawQuery(String.format("SELECT * FROM '%s'",underscore_Name),null);
 
         int j = c.getCount();
 
@@ -217,6 +219,7 @@ public class DetailsActivity extends AppCompatActivity {
                             }else{
 
 
+
                                 // fetch current balance
                                 Cursor cc = db.rawQuery(String.format("SELECT * FROM member_info WHERE mem_name IS '%s'",Name),null);
                                 int bal_from_db_index = cc.getColumnIndex("mem_balance");
@@ -239,11 +242,11 @@ public class DetailsActivity extends AppCompatActivity {
                                 DetailsList newList;
                                 if(!pNote.isEmpty()){
                                     Toast.makeText(DetailsActivity.this, pNote, Toast.LENGTH_SHORT).show();
-                                    db.execSQL(String.format("UPDATE '%s' SET paid_wages = %s,rem_wages = %s,note='%s' WHERE id = %s",Name,updated_given,updated_remaining,pNote,currentPosition.getId()));
+                                    db.execSQL(String.format("UPDATE '%s' SET paid_wages = %s,rem_wages = %s,note='%s' WHERE id = %s",underscore_Name,updated_given,updated_remaining,pNote,currentPosition.getId()));
                                      newList = new DetailsList(currentPosition.getDays(),currentPosition.getTotal_wages(),updated_remaining,updated_given,
                                             pNote,currentPosition.getTime(),currentPosition.getHalfdays(),currentPosition.getId());
                                 }else{
-                                    db.execSQL(String.format("UPDATE '%s' SET paid_wages = %s,rem_wages = %s WHERE id = %s",Name,updated_given,updated_remaining,currentPosition.getId()));
+                                    db.execSQL(String.format("UPDATE '%s' SET paid_wages = %s,rem_wages = %s WHERE id = %s",underscore_Name,updated_given,updated_remaining,currentPosition.getId()));
                                      newList = new DetailsList(currentPosition.getDays(),currentPosition.getTotal_wages(),updated_remaining,updated_given,
                                             currentPosition.getNote(),currentPosition.getTime(),currentPosition.getHalfdays(),currentPosition.getId());
                                 }
@@ -305,7 +308,7 @@ public class DetailsActivity extends AppCompatActivity {
                                     SQLiteDatabase dbb = openOrCreateDatabase("rokk_db",MODE_PRIVATE,null);
 
 //                                    String toBeDeletedString = textViewRemWage.getText().toString();
-                                    Cursor ccc = dbb.rawQuery(String.format("SELECT * FROM '%s' WHERE date IS '%s'",Name,String.valueOf(textViewDate.getText())),null);
+                                    Cursor ccc = dbb.rawQuery(String.format("SELECT * FROM '%s' WHERE date IS '%s'",underscore_Name,String.valueOf(textViewDate.getText())),null);
                                     int rem_index = ccc.getColumnIndex("rem_wages");
                                     ccc.moveToFirst();
                                     rem_from_db = ccc.getInt(rem_wages_index);
@@ -322,7 +325,7 @@ public class DetailsActivity extends AppCompatActivity {
                                     int toBeUpdated = Integer.valueOf(bal_from_db) - rem_from_db;
 
                                     dbb.execSQL(String.format("UPDATE member_info SET mem_balance = %s WHERE mem_name IS '%s'",toBeUpdated,Name));
-                                    dbb.execSQL(String.format("DELETE FROM '%s' WHERE date IS '%s'",Name,String.valueOf(textViewDate.getText())));
+                                    dbb.execSQL(String.format("DELETE FROM '%s' WHERE date IS '%s'",underscore_Name,String.valueOf(textViewDate.getText())));
                                     Toast.makeText(mContext, getString(R.string.alertboxToast), Toast.LENGTH_SHORT).show();
                                     detList.remove(position);
                                     detailsAdapter.notifyDataSetChanged();

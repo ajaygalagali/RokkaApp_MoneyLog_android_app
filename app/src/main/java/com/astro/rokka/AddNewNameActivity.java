@@ -143,6 +143,9 @@ public class AddNewNameActivity extends AppCompatActivity {
                     flag = false;
                 }*/
 
+                // replacing space to underscore due to table name
+                Name = Name.replace(" ", "_");
+
                 //CREATING TABLE 2
                 db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,days INT,total_wages INT,paid_wages INT,rem_wages INT,date VARCHAR,note VARCHAR,halfdays INT)", Name));
 
