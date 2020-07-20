@@ -7,6 +7,33 @@
     tools:context=".OthersFeature.Others_mainActivity">
 
     <LinearLayout
+        android:id="@+id/instructionLoOthermain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_baseline_person_add_48" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="@string/mainInstruction"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,31 +51,31 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            app:srcCompat="@drawable/ic_arrowback"
             android:background="?android:attr/selectableItemBackground"
-            android:onClick="arrowBackClicked"/>
+            android:onClick="arrowBackClicked"
+            app:srcCompat="@drawable/ic_arrowback" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:gravity="start|center"
             android:text="@string/hAlentBorrow"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:gravity="start|center"/>
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/imageButtonAddOtherMember"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
             android:layout_weight="0.5"
+            android:background="#00AAAAAA"
+            android:onClick="AddOtherMemberClicked"
             android:paddingTop="-5dp"
             android:paddingBottom="-5dp"
-            android:layout_marginEnd="20dp"
-            android:background="#00AAAAAA"
-            android:src="@drawable/ic_baseline_person_add_24"
-            android:onClick="AddOtherMemberClicked"/>
+            android:src="@drawable/ic_baseline_person_add_24" />
 
 
     </LinearLayout>
@@ -56,7 +83,8 @@
     <ListView
         android:id="@+id/listViewOtherMain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

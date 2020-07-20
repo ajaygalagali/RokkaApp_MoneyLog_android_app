@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,10 +13,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +27,7 @@ import android.widget.Toast;
 
 import com.astro.rokka.DetailsList;
 import com.astro.rokka.Expense.ExpenseMainActivity;
+import com.astro.rokka.MainActivity;
 import com.astro.rokka.R;
 
 import org.w3c.dom.Text;
@@ -40,11 +45,19 @@ public class otherDetailsActivity extends AppCompatActivity {
     SQLiteDatabase db;
 
 
-//Todo: Initial balance bug
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other_details);
+
+        // notification bar color
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            window.setStatusBarColor(ContextCompat.getColor(otherDetailsActivity.this,R.color.mycolor));
+        }
 
         listViewOtherDetails = findViewById(R.id.listViewOtherDetials);
         textViewTitle = findViewById(R.id.textViewOdetailsTitle);
@@ -60,7 +73,7 @@ public class otherDetailsActivity extends AppCompatActivity {
 
         c.moveToFirst();
         int amountIndex = c.getColumnIndex("amount");
-        int current_balanceIndex = c.getColumnIndex("current_balance");
+
         int dateIndex = c.getColumnIndex("date");
         int noteIndex = c.getColumnIndex("note");
         int idIndex = c.getColumnIndex("id");

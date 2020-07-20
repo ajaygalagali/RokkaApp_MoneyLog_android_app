@@ -1,18 +1,22 @@
 package com.astro.rokka;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
@@ -54,9 +58,25 @@ public class HomeActivity extends AppCompatActivity {
         setLocaleOnCreate(currentLanguage);
         cursor.close();
 
+
         setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // notification bar color
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            window.setStatusBarColor(ContextCompat.getColor(HomeActivity.this,R.color.mycolor));
+
+        }
 
 
         // Menu
@@ -177,11 +197,11 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menuAboutus:
-                        Toast.makeText(HomeActivity.this, "About Us", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HomeActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
                         return true;
 
                     case R.id.menuHelp:
-                        Toast.makeText(HomeActivity.this, "Help", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HomeActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
                         return true;
 
                     default: return false;

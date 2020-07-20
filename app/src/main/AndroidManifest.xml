@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".Expense.ExpenseMainActivity" android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Expense.ExpenseMainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".OthersFeature.otherDetailsActivity" android:screenOrientation="portrait"/>
 
         <activity android:name=".OthersFeature.otherAddNewMemberActivity" android:screenOrientation="portrait"/>

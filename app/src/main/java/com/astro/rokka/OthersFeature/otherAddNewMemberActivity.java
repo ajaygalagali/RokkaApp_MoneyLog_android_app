@@ -1,19 +1,28 @@
 package com.astro.rokka.OthersFeature;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astro.rokka.AddNewNameActivity;
+import com.astro.rokka.MainActivity;
 import com.astro.rokka.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class otherAddNewMemberActivity extends AppCompatActivity {
 
@@ -30,6 +39,21 @@ public class otherAddNewMemberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other_add_new_member);
+
+        // notification bar color
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            window.setStatusBarColor(ContextCompat.getColor(otherAddNewMemberActivity.this,R.color.mycolor));
+
+        }
 
         editTextName = findViewById(R.id.editTextOtherMemName);
         editTextBalance = findViewById(R.id.editTextOtherBal);
@@ -99,21 +123,19 @@ public class otherAddNewMemberActivity extends AppCompatActivity {
 
                 db.execSQL(String.format("INSERT INTO oMemInfo (oMemName,oMemBalance) VALUES('%s',%s)", name, balance));
 
-               /* Cursor c = db.rawQuery(String.format("SELECT * FROM oMemInfo WHERE oMemName IS '%s'", name), null);
-                int mem_idIndex = c.getColumnIndex("id");
-                c.moveToFirst();
-                boolean flag = true;
-                int mem_id_from_db = 0;
-                while (flag) {
-                    mem_id_from_db = c.getInt(mem_idIndex);
-                    flag = false;
-                }*/
-
                 //CREATING TABLE 2
                 String tabName = String.valueOf(editTextName.getText());
 //                db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,amount INT,current_balance INT,date VARCHAR,note VARCHAR)", mem_id_from_db));
-                db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,amount INT,current_balance INT,date VARCHAR,note VARCHAR)", tabName));
+                db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,amount INT,date VARCHAR,note VARCHAR)", tabName));
 
+                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+                String stringTime = currentDate + " " + currentTime;
+                db.execSQL(String.format("INSERT INTO '%s'(amount,date,note) VALUES(%s,'%s','%s')"
+                        , tabName
+                        , balance
+                        , stringTime
+                        , getString(R.string.initialBal)));
 //                Log.i("Table 2",tabName);
 
                 Others_mainActivity.other_main_adapter.notifyDataSetChanged();

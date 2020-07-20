@@ -14,7 +14,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -142,6 +145,12 @@ public class AddNewNameActivity extends AppCompatActivity {
 
                 //CREATING TABLE 2
                 db.execSQL(String.format("CREATE TABLE IF NOT EXISTS '%s'(id INTEGER PRIMARY KEY AUTOINCREMENT,days INT,total_wages INT,paid_wages INT,rem_wages INT,date VARCHAR,note VARCHAR,halfdays INT)", Name));
+
+                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+                String stringTime = currentDate + " " + currentTime;
+
+                db.execSQL(String.format("INSERT INTO '%s' (date,days,paid_wages,rem_wages,note,total_wages,halfdays) VALUES('%s',%s,%s,%s,'%s',%s,%s)",Name , stringTime, 0, 0, balance, getString(R.string.initialBal), 0, 0));
 
 
                 MainActivity.homeListAdapter.notifyDataSetChanged();

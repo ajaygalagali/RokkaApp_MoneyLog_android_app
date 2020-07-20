@@ -47,8 +47,8 @@
     <string name="plusTitle">ಗೆ ಪಾವತಿಸಲಾಗುತ್ತಿದೆ</string>
     <string name="mainInstructionB">ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
     <string name="oAddNewTitle">" ಹೊಸ ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ"</string>
-    <string name="oPlusTitle">ಕ್ರೆಡಿಟ್</string>
-    <string name="oMinusTitle">ಡೆಬಿಟ್</string>
+    <string name="oPlusTitle">ನೀಡಿ</string>
+    <string name="oMinusTitle">ತೆಗೆದುಕೊ</string>
     <string name="oPlusAmt">ಮೊತ್ತವನ್ನು ನಮೂದಿಸಿ</string>
     <string name="oPlusBtn">ಸೇರಿಸಿ</string>
     <string name="oPlusToastTrue">ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ</string>
@@ -73,6 +73,8 @@
     <string name="detStatusNegative">ಬಾಕಿ ಉಳಿದಿದೆ</string>
     <string name="detStatusPositive">ಪಾವತಿಸಲಾಗಿದೆ</string>
     <string name="detUpdate">ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ</string>
+    <string name="initialBal">ಆರಂಭಿಕ ಬ್ಯಾಲೆನ್ಸ್</string>
+    <string name="eIntruction">ಹೊಸ ವೆಚ್ಚವನ್ನು ಸೇರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ</string>
 
 
 </resources>

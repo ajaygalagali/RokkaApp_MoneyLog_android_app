@@ -239,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     db.execSQL(String.format("DELETE FROM member_info WHERE mem_name IS '%s'",textViewName.getText().toString()));
+                                    db.execSQL(String.format("DROP TABLE %s",textViewName.getText().toString()));
                                     Toast.makeText(mContext, getString(R.string.alertboxToast), Toast.LENGTH_SHORT).show();
                                     arrayList.remove(position);
                                     homeListAdapter.notifyDataSetChanged();

@@ -35,8 +35,8 @@
     <string name="plusTextGiven">"शिल्लक वेतन : "</string>
     <string name="detInstruction">व्यवहार येथे दर्शविले आहेत</string>
     <string name="oAddNewTitle">नवीन सदस्य जोडा</string>
-    <string name="oMinusTitle">डेबिट</string>
-    <string name="oPlusTitle">जमा</string>
+    <string name="oMinusTitle">घ्या</string>
+    <string name="oPlusTitle">द्या</string>
     <string name="oPlusAmt">रक्कम प्रविष्ट करा</string>
     <string name="oPlusBtn">जोडा</string>
     <string name="oPlusToastTrue">यशस्वीरित्या जोडले</string>
@@ -61,4 +61,6 @@
     <string name="detStatusNegative">प्रलंबित</string>
     <string name="detStatusPositive">पैसे दिले</string>
     <string name="detUpdate">यशस्वीरित्या अद्यतनित केले</string>
+    <string name="initialBal">प्रारंभिक शिल्लक</string>
+    <string name="eIntruction">नवीन खर्च जोडण्यासाठी क्लिक करा</string>
 </resources>

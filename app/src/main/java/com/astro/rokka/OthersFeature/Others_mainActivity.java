@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -13,15 +14,19 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +47,7 @@ public class Others_mainActivity extends AppCompatActivity {
     ListView listViewOtherMain;
     ArrayList<otherMainList> arrayList;
     SQLiteDatabase db;
+    LinearLayout linearLayout;
 
     EditText editTextPlus,editTextPlusNote;
     Button buttonPlus, buttonMinus;
@@ -52,6 +58,14 @@ public class Others_mainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_others_main);
+
+        // notification bar color
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            window.setStatusBarColor(ContextCompat.getColor(Others_mainActivity.this,R.color.mycolor));
+        }
 
         listViewOtherMain = findViewById(R.id.listViewOtherMain);
 
@@ -79,7 +93,10 @@ public class Others_mainActivity extends AppCompatActivity {
 
         }
         c.close();
-
+        linearLayout = findViewById(R.id.instructionLoOthermain);
+        if(arrayList.isEmpty()){
+            linearLayout.setVisibility(View.VISIBLE);
+        }
         listViewOtherMain.setAdapter(other_main_adapter);
 
 
@@ -166,20 +183,23 @@ public class Others_mainActivity extends AppCompatActivity {
                                 //Updating balance in oMemInfo Table
                                 db.execSQL(String.format("UPDATE oMemInfo SET oMemBalance=%s WHERE oMemName IS '%s'", updatedBal, String.valueOf(textViewName.getText())));
 
-                                Log.i("Updated Balance Inserted", String.valueOf(updatedBal));
+
                                 String note = String.valueOf(editTextPlusNote.getText());
                                 note = note.replace("'", "''");
 
                                 //amount INT,current_balance INT,date VARCHAR,note VARCHAR
-                                db.execSQL(String.format("INSERT INTO '%s'(amount,current_balance,date,note) VALUES(%s,%s,'%s','%s')"
+                                db.execSQL(String.format("INSERT INTO '%s'(amount,date,note) VALUES(%s,'%s','%s')"
                                         , String.valueOf(textViewName.getText())
                                         , Integer.parseInt(String.valueOf(editTextPlus.getText()))
-                                        , updatedBal
                                         , stringTime
                                         , note));
 //                            Log.i("Insertion","TRUE");
 //                            other_main_adapter.notifyDataSetChanged();
-                                textViewBalance.setText(String.valueOf(updatedBal));
+//                                textViewBalance.setText(String.valueOf(updatedBal));
+                                arrayList.set(position,new otherMainList(currentPosition.getOtherMemName(),updatedBal));
+                                other_main_adapter.notifyDataSetChanged();
+//                                textViewBalance.setTextColor(Color.BLUE);
+
                                 Toast.makeText(Others_mainActivity.this, getString(R.string.oPlusToastTrue), Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
@@ -227,15 +247,16 @@ public class Others_mainActivity extends AppCompatActivity {
 //                            Log.i("Updated Balance Inserted",String.valueOf(updatedBal));
 
                                 //amount INT,current_balance INT,date VARCHAR,note VARCHAR
-                                db.execSQL(String.format("INSERT INTO '%s'(amount,current_balance,date,note) VALUES(%s,%s,'%s','%s')"
+                                db.execSQL(String.format("INSERT INTO '%s'(amount,date,note) VALUES(%s,'%s','%s')"
                                         , String.valueOf(textViewName.getText())
                                         , (Integer.parseInt(String.valueOf(editTextPlus.getText())) * -1)
-                                        , updatedBal
                                         , stringTime
                                         , String.valueOf(editTextPlusNote.getText())));
 //                            Log.i("Insertion","TRUE");
 //                            other_main_adapter.notifyDataSetChanged();
-                                textViewBalance.setText(String.valueOf(updatedBal));
+//                                textViewBalance.setText(String.valueOf(updatedBal));
+                                arrayList.set(position,new otherMainList(currentPosition.getOtherMemName(),updatedBal));
+                                other_main_adapter.notifyDataSetChanged();
                                 Toast.makeText(Others_mainActivity.this, getString(R.string.oPlusToastFalse), Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }

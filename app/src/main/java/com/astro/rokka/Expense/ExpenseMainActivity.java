@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -15,15 +16,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,6 +37,7 @@ import android.widget.Toast;
 import com.astro.rokka.HomeActivity;
 import com.astro.rokka.HomeList;
 import com.astro.rokka.MainActivity;
+import com.astro.rokka.OthersFeature.otherDetailsActivity;
 import com.astro.rokka.R;
 
 import java.text.SimpleDateFormat;
@@ -59,11 +65,22 @@ public class ExpenseMainActivity extends AppCompatActivity {
 
     int total;
 
+    LinearLayout linearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_main);
 
+        // notification bar color
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            window.setStatusBarColor(ContextCompat.getColor(ExpenseMainActivity.this,R.color.mycolor));
+        }
+
+        linearLayout = findViewById(R.id.instructionLoExp);
         //Calender
         calendar = Calendar.getInstance(TimeZone.getDefault());
 
@@ -97,7 +114,7 @@ public class ExpenseMainActivity extends AppCompatActivity {
                 plusMonth = month+1;
 
                 if(position == 0){
-                    String query = String.format(String.format("SELECT * FROM expenseTable WHERE dateDD IS %s AND dateMM is %s",date,plusMonth));
+                    String query = String.format("SELECT * FROM expenseTable WHERE dateDD IS %s AND dateMM is %s",date,plusMonth);
                     updateAdapter(query);
                 }
 
@@ -112,7 +129,7 @@ public class ExpenseMainActivity extends AppCompatActivity {
                     updateAdapter(query);
                 }
                 if(position == 3){
-                    String query = String.format("SELECT * FROM expenseTable");
+                    String query = "SELECT * FROM expenseTable";
                     updateAdapter(query);
                 }
             }
@@ -156,6 +173,11 @@ public class ExpenseMainActivity extends AppCompatActivity {
         }
         textViewTotal.setText("₹ "+String.valueOf(total));
         c.close();
+
+        if(arrayList.isEmpty()){
+            linearLayout.setVisibility(View.VISIBLE);
+
+        }
     }
 
     public void newExpenseClicked(View view) {
@@ -203,7 +225,7 @@ public class ExpenseMainActivity extends AppCompatActivity {
                     arrayList.add(new ExpenseList(Integer.parseInt(String.valueOf(editTextExpAmount.getText())),String.valueOf(editTextExpNote.getText()),stringTime,lastid));
                     // String t ="₹ "+String.valueOf(total+Integer.parseInt(String.valueOf(editTextExpAmount.getText()))) ;
                     total = total+Integer.parseInt(editTextExpAmount.getText().toString());
-                    textViewTotal.setText(String.valueOf(total));
+                    textViewTotal.setText("₹ "+String.valueOf(total));
 
                     Toast.makeText(ExpenseMainActivity.this, getString(R.string.oPlusToastTrue), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();

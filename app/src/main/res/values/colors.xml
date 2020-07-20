@@ -6,4 +6,5 @@
     <color name="mycolor">#130f40</color>
     <color name="alert">#cc3300</color>
     <color name="white">#ffffff</color>
+    <color name="grey">#808080</color>
 </resources>

@@ -2,8 +2,12 @@
 <resources>
     <string name="app_name">RoKka</string>
 
-    <string name="mainInstruction">Add New Member</string>
+    <string name="mainInstruction">Click to add new member</string>
     <string name="mainInstructionB">Select Language</string>
+
+
+
+
     <string name="alertboxTitle">: Delete?</string>
     <string name="alertboxLine">" Are you sure you want to delete this?"</string>
     <string name="alertboxYes">Yes</string>
@@ -72,6 +76,7 @@
 <!--    Expense Activity-->
     <string name="epTitle">Add New Expense</string>
     <string name="eAlertTitle">Delete?</string>
+    <string name="eIntruction">Click to add new expense</string>
 
 <!--    Menu-->
     <string name="menuhelp">Help</string>
@@ -83,6 +88,8 @@
     <string name="fThisYear">This Year</string>
     <string name="fAll">All</string>
 
+
+    <string name="initialBal">Initial Balance</string>
 
 </resources>
 
