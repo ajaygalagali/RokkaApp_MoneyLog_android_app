@@ -98,12 +98,15 @@ public class otherAddNewMemberActivity extends AppCompatActivity {
 //                Log.i("Member Name",db_mem_name);
 //                Log.i("User Input",Name);
                 if(name.equalsIgnoreCase(db_mem_name)){
-                    /*textViewAlertAddMember.setText(getString(R.string.addMAlertB));
-                    textViewAlertAddMember.setScaleX(0);
-                    textViewAlertAddMember.setScaleY(0);
-                    textViewAlertAddMember.animate().scaleX(1).setDuration(500);
-                    textViewAlertAddMember.animate().scaleY(1).setDuration(500);*/
-//                    Toast.makeText(this, "UserName Taken", Toast.LENGTH_SHORT).show();
+
+                    textViewAlert.setText(getString(R.string.addMAlertB));
+                    textViewAlert.setScaleX(0);
+                    textViewAlert.setScaleY(0);
+                    textViewAlert.animate().scaleX(1).setDuration(500);
+                    textViewAlert.animate().scaleY(1).setDuration(500);
+                    flagUsernameCheck = 1;
+                    break;
+                }else if(name.replace("_"," ").equalsIgnoreCase(db_mem_name)){
                     textViewAlert.setText(getString(R.string.addMAlertB));
                     textViewAlert.setScaleX(0);
                     textViewAlert.setScaleY(0);

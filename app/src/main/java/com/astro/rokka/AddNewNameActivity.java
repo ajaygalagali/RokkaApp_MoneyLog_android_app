@@ -123,6 +123,14 @@ public class AddNewNameActivity extends AppCompatActivity {
                     textViewAlertAddMember.animate().scaleY(1).setDuration(500);
                     flagUsernameCheck = 1;
                     break;
+                }else if(Name.replace("_"," ").equalsIgnoreCase(db_mem_name)){
+                    textViewAlertAddMember.setText(getString(R.string.addMAlertB));
+                    textViewAlertAddMember.setScaleX(0);
+                    textViewAlertAddMember.setScaleY(0);
+                    textViewAlertAddMember.animate().scaleX(1).setDuration(500);
+                    textViewAlertAddMember.animate().scaleY(1).setDuration(500);
+                    flagUsernameCheck = 1;
+                    break;
                 }
                 cc.moveToNext();
             }

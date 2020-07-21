@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     Locale myLocale;
     SQLiteDatabase db;
 
+    // Todo: Underscore member name bug
 
 
     @Override
