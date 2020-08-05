@@ -10,7 +10,7 @@ I started this project as my dad was looking for an app which tracks the wages p
 #### Features 
 
 - Save record of wages paid
-- Save expenses
+- Track expenses
 - Track money lent or borrowed
 
 Download this app on [playstore](https://play.google.com/store/apps/details?id=com.astro.rokka)
