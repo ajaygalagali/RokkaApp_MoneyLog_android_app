@@ -150,13 +150,13 @@ public class plusActivity extends AppCompatActivity {
 
 
 
-         if(totalPagar == 0){
+         /*if(totalPagar == 0){
             textViewAlertPlus.setScaleX(0);
             textViewAlertPlus.setScaleY(0);
             textViewAlertPlus.setText(getString(R.string.plusAlertC));
             textViewAlertPlus.animate().scaleX(1).setDuration(500);
             textViewAlertPlus.animate().scaleY(1).setDuration(500);
-        }else if(given.isEmpty()){
+        }else */if(given.isEmpty()){
 //            Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
              textViewAlertPlus.setScaleX(0);
              textViewAlertPlus.setScaleY(0);
