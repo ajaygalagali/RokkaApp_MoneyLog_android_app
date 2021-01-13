@@ -55,8 +55,13 @@ public class plusActivity extends AppCompatActivity {
 // finally change the color
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.mycolor));
 
+        db = openOrCreateDatabase("rokk_db", MODE_PRIVATE, null);
+
+
         Intent i =getIntent();
         name = i.getStringExtra("name");
+
+
         currentBalance = i.getStringExtra("currentBalance");
         position = i.getStringExtra("position");
         assert position != null;
@@ -148,6 +153,13 @@ public class plusActivity extends AppCompatActivity {
         given = editTextGiven.getText().toString();
         totalPagar = calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar);
 
+        try{
+            db.execSQL(String.format("CREATE TRIGGER cal_total_wage BEFORE INSERT on '%s' for EACH row BEGIN UPDATE '%s' set total_wages = %d;END;", name, name,totalPagar));
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
          /*if(totalPagar == 0){
@@ -174,7 +186,6 @@ public class plusActivity extends AppCompatActivity {
             String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
             stringTime = currentDate + " " + currentTime;
 
-            db = openOrCreateDatabase("rokk_db", MODE_PRIVATE, null);
             db.execSQL(String.format("UPDATE member_info SET mem_balance=%s WHERE id IS %s", updatedBalance, posiOne));
 
              name = name.replace(" ", "_");
