@@ -154,9 +154,7 @@ public class plusActivity extends AppCompatActivity {
         totalPagar = calculateTotalWage(tFulldays,tHalfdays,tFullPagar,tHalfPagar);
 
         try{
-            db.execSQL(String.format("CREATE TRIGGER cal_total_wage BEFORE INSERT on '%s' for EACH row BEGIN UPDATE '%s' set total_wages = %d;END;", name, name,totalPagar));
-
-
+            db.execSQL(String.format("CREATE TRIGGER cal_total_wage BEFORE INSERT on '%s' for EACH row BEGIN UPDATE '%s' set total_wages = %d WHERE id = new.id;END;", name, name,totalPagar));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -168,7 +166,8 @@ public class plusActivity extends AppCompatActivity {
             textViewAlertPlus.setText(getString(R.string.plusAlertC));
             textViewAlertPlus.animate().scaleX(1).setDuration(500);
             textViewAlertPlus.animate().scaleY(1).setDuration(500);
-        }else */if(given.isEmpty()){
+        }else */
+        if(given.isEmpty()){
 //            Toast.makeText(this, "ಕೊಟ್ಟುದ್ದು ಬರೆಯಿರಿ", Toast.LENGTH_SHORT).show();
              textViewAlertPlus.setScaleX(0);
              textViewAlertPlus.setScaleY(0);
